@@ -222,6 +222,65 @@ public class testgates {
         dff.calc();
         if ( false != dff.getOutput() ) return false;
 
+        // store true
+        dff.setIput(true, false, false);
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.setIput(true, true, false);
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.setIput(true, false, false);
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.setIput(true, true, true);
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.setIput(true, false, true);
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.setIput(true, true, true);
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.setIput(true, true, false);
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.setIput(false, true, false);
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.setIput(false, false, false);
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+
         return true;
     }
 }

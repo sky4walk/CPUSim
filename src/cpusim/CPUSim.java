@@ -13,24 +13,24 @@ public class CPUSim {
 
     public void testCircuit() {
         testgates tester = new testgates();
-        if ( tester.testNand() ) System.out.println("nand OK");
-        else System.out.println("nand NOK");
-        if ( tester.testNot() ) System.out.println("not OK");
-        else System.out.println("not NOK");
-        if ( tester.testAnd() ) System.out.println("and OK");
-        else System.out.println("and NOK");
-        if ( tester.testOr() ) System.out.println("or OK");
-        else System.out.println("or NOK");
-        if ( tester.testXor() ) System.out.println("xor OK");
-        else System.out.println("xor NOK");
-        if ( tester.testAdd1Bit()) System.out.println("Add1Bit OK");
-        else System.out.println("Add1Bit NOK");
-        if ( tester.testMux1Bit2x()) System.out.println("Mux1Bit2x OK");
-        else System.out.println("Mux1Bit2x NOK");
-        if ( tester.testDeMux1Bit2x()) System.out.println("DeMux1Bit2x OK");
-        else System.out.println("DeMux1Bit2x NOK");
-        if ( tester.testDFlipFlop()) System.out.println("DFlipFlop OK");
-        else System.out.println("DFlipFlop NOK");
+        if ( tester.testNand() ) System.out.println("OK nand");
+        else System.out.println("NOK nand");
+        if ( tester.testNot() ) System.out.println("OK not");
+        else System.out.println("NOK not");
+        if ( tester.testAnd() ) System.out.println("OK and");
+        else System.out.println("NOK and");
+        if ( tester.testOr() ) System.out.println("OK or");
+        else System.out.println("NOK or");
+        if ( tester.testXor() ) System.out.println("OK xor");
+        else System.out.println("NOK xor");
+        if ( tester.testAdd1Bit()) System.out.println("OK Add1Bit");
+        else System.out.println("NOK Add1Bit");
+        if ( tester.testMux1Bit2x()) System.out.println("OK Mux1Bit2x");
+        else System.out.println("NOK Mux1Bit2x");
+        if ( tester.testDeMux1Bit2x()) System.out.println("OK DeMux1Bit2x");
+        else System.out.println("NOK DeMux1Bit2x");
+        if ( tester.testDFlipFlop()) System.out.println("OK DFlipFlop");
+        else System.out.println("NOK DFlipFlop");
     }
     /**
      * @param args the command line arguments
