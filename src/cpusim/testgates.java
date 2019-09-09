@@ -200,6 +200,28 @@ public class testgates {
         return true;
     }
     public boolean testDFlipFlop() {
+        DFlipFlop dff = new DFlipFlop();
+        
+        // initialize DFlipFlop
+        dff.setIput(false, false, false);
+        dff.calc();
+
+        dff.setIput(false, true, true);
+        dff.calc();
+        dff.calc();
+        dff.calc();
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        
+        // changing CLK
+        dff.setIput(false, false, true);
+        dff.calc();
+        dff.setIput(false, true, true);
+        dff.calc();
+        dff.setIput(false, false, true);
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+
         return true;
     }
 }
