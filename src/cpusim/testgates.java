@@ -285,10 +285,15 @@ public class testgates {
     }
     public boolean testDataLine8Bit() {
         DataLine8Bit line = new DataLine8Bit();
-        String testStr = "10101010";
+        String testStr = "01111011";
         line.setBitsString(testStr);
-        testStr = line.getBitsString();
-         
-          return true;
+        if ( testStr.compareTo( line.getBitsString() ) != 0 ) return false;
+        if ( 123 != line.getBitsInt() ) return false;
+        
+        line.setBitsInt(123);
+        if ( testStr.compareTo( line.getBitsString() ) != 0 ) return false;
+        if ( 123 != line.getBitsInt() ) return false;
+        
+        return true;
     }
 }

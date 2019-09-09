@@ -67,4 +67,19 @@ public class DataLine8Bit {
             }
         }
     }
+    public void setBitsInt(int val) {
+        reset();
+        int tmp = val;
+        int exp = 1;
+        int i = 0;
+        while ( 0 != tmp && i < pins.length ) {
+            if ( 1 == tmp % 2 ) {
+                setPin(i, true);
+            } 
+            i++;
+            tmp /= 2;
+            exp *= 2;
+        }
+        if ( exp <= val ) reset();
+    }
 }
