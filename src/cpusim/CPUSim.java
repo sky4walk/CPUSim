@@ -31,6 +31,8 @@ public class CPUSim {
         else System.out.println("NOK DeMux1Bit2x");
         if ( tester.testDFlipFlop()) System.out.println("OK DFlipFlop");
         else System.out.println("NOK DFlipFlop");
+        if ( tester.testDataLine8Bit()) System.out.println("OK DataLine8Bit");
+        else System.out.println("NOK DataLine8Bit");
     }
     /**
      * @param args the command line arguments

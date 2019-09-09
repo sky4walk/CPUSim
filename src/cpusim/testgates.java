@@ -283,4 +283,12 @@ public class testgates {
 
         return true;
     }
+    public boolean testDataLine8Bit() {
+        DataLine8Bit line = new DataLine8Bit();
+        String testStr = "10101010";
+        line.setBitsString(testStr);
+        testStr = line.getBitsString();
+         
+          return true;
+    }
 }

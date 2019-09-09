@@ -11,6 +11,14 @@ package cpusim;
  */
 public class DataLine8Bit {
     private boolean pins[] = new boolean[8];
+    DataLine8Bit() {
+        reset();
+    }
+    public void reset() {
+        for ( int i = 0; i < pins.length; i++ ) {
+            setPin(i,false);
+        }        
+    }
     public void setPin(int nr,boolean val) {
         if ( nr < pins.length ) {
             pins[nr] = val;
@@ -30,7 +38,11 @@ public class DataLine8Bit {
     public String getBitsString() {
         String bits = "";
         for ( int i = 0; i < pins.length; i++ ) {
-            bits += pins[pins.length - 1 - i];
+            if ( pins[pins.length - 1 - i] ) {
+                bits += "1";
+            } else {
+                bits += "0";
+            }
         }
         return bits;
     }
@@ -44,5 +56,15 @@ public class DataLine8Bit {
             cnt *= 2;
         }
         return bits;
+    }
+    public void setBitsString(String val) {
+        reset();
+        if ( val.length() == pins.length ) {
+            for ( int i = 0; i < pins.length; i++ ) {
+                if ( '1' == val.charAt(i) ) {
+                    setPin(pins.length - 1 - i, true);
+                } 
+            }
+        }
     }
 }
