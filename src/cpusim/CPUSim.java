@@ -35,6 +35,8 @@ public class CPUSim {
         else System.out.println("NOK DataLine8Bit");
         if ( tester.testAdd8Bit()) System.out.println("OK Add8Bit");
         else System.out.println("NOK Add8Bit");
+        if ( tester.testRegister8Bit()) System.out.println("OK Register8Bit");
+        else System.out.println("NOK Register8Bit");
     }
     /**
      * @param args the command line arguments

@@ -17,12 +17,11 @@ public class DFlipFlop {
     private and and1 = new and();
     private or or1 = new or();
     private not not1 = new not();
-    private boolean outNand3;
-    private boolean outNand4;
     
     DFlipFlop() {
-        outNand3 = false;
-        outNand4 = false;
+        this.setIput(false, true, true);
+        this.calc();
+        this.calc();
     }
     
     public void setIput(boolean D, boolean CLK, boolean enable) {
@@ -40,17 +39,14 @@ public class DFlipFlop {
     }
     
     public void calc() {
-        nand3.setInput(nand1.getOutput(), outNand4);
+        nand3.setInput(nand1.getOutput(), nand4.getOutput());
         nand3.calc();
         
-        nand4.setInput(nand2.getOutput(), outNand3);
-        nand4.calc();
-        
-        outNand3 = nand3.getOutput();
-        outNand4 = nand4.getOutput();
+        nand4.setInput(nand2.getOutput(), nand3.getOutput());
+        nand4.calc();                
     }
     
     public boolean getOutput() {
-        return outNand3;
+        return nand3.getOutput();
     }
 }

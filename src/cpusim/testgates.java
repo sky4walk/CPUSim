@@ -202,10 +202,17 @@ public class testgates {
     public boolean testDFlipFlop() {
         DFlipFlop dff = new DFlipFlop();
         
-        // initialize DFlipFlop
-        dff.setIput(false, false, false);
+        if ( false != dff.getOutput() ) return false;
+        
+        dff.setIput(true,true,true);
         dff.calc();
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
+        dff.setIput(true,true,false);
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
 
+        
         dff.setIput(false, true, true);
         dff.calc();
         dff.calc();
@@ -334,6 +341,34 @@ public class testgates {
         adder.calc();
         if ( 0 != cOut.getBitsInt() ) return false;
         if ( true != uOut.getPin(0) ) return false;
+        
+        return true;
+    }
+    public boolean testRegister8Bit() {
+        DataLine8Bit in  = new DataLine8Bit();
+        DataLine8Bit out = new DataLine8Bit();
+        DataLine1Bit clk  = new DataLine1Bit();
+        DataLine1Bit enable = new DataLine1Bit();
+        Register8Bit reg = new Register8Bit(in, out, clk, enable);
+        in.setBitsInt(200);
+        clk.setPin(0, true);
+        enable.setPin(0, true);        
+        if ( 0 != out.getBitsInt() ) return false;
+
+        reg.calc();
+        if ( 200 != out.getBitsInt() ) return false;
+
+        clk.setPin(0, false);
+        reg.calc();
+        int ret = out.getBitsInt();
+        if ( 200 != out.getBitsInt() ) return false;
+
+        enable.setPin(0, false);        
+        reg.calc();
+        reg.calc();
+        reg.calc();
+        if ( 200 != out.getBitsInt() ) return false;
+
         
         return true;
     }
