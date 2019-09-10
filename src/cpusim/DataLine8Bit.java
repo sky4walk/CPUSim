@@ -11,7 +11,7 @@ package cpusim;
  */
 public class DataLine8Bit {
     private boolean pins[] = new boolean[8];
-    DataLine8Bit() {
+    public DataLine8Bit() {
         reset();
     }
     public void reset() {

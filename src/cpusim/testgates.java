@@ -296,4 +296,45 @@ public class testgates {
         
         return true;
     }
+    public boolean testAdd8Bit() {
+        DataLine8Bit aIn  = new DataLine8Bit();
+        DataLine8Bit bIn  = new DataLine8Bit();
+        DataLine8Bit cOut = new DataLine8Bit();
+        DataLine1Bit uIn  = new DataLine1Bit();
+        DataLine1Bit uOut = new DataLine1Bit();
+        
+        aIn.setBitsInt(103);
+        bIn.setBitsInt(87);
+        Add8Bit adder = new Add8Bit(aIn, bIn, cOut, uIn, uOut);
+        adder.calc();
+        if ( 190 != cOut.getBitsInt() ) return false;
+        if ( false != uOut.getPin(0) ) return false;
+
+        aIn.setBitsInt(199);
+        bIn.setBitsInt(44);
+        adder.calc();
+        if ( 243 != cOut.getBitsInt() ) return false;
+        if ( false != uOut.getPin(0) ) return false;
+        
+        aIn.setBitsInt(67);
+        bIn.setBitsInt(188);
+        adder.calc();
+        if ( 255 != cOut.getBitsInt() ) return false;
+        if ( false != uOut.getPin(0) ) return false;
+
+        aIn.setBitsInt(67);
+        bIn.setBitsInt(189);
+        adder.calc();
+        if ( 0 != cOut.getBitsInt() ) return false;
+        if ( true != uOut.getPin(0) ) return false;
+
+        aIn.setBitsInt(67);
+        bIn.setBitsInt(188);
+        uIn.setPin(0, true);
+        adder.calc();
+        if ( 0 != cOut.getBitsInt() ) return false;
+        if ( true != uOut.getPin(0) ) return false;
+        
+        return true;
+    }
 }

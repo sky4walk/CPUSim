@@ -33,6 +33,8 @@ public class CPUSim {
         else System.out.println("NOK DFlipFlop");
         if ( tester.testDataLine8Bit()) System.out.println("OK DataLine8Bit");
         else System.out.println("NOK DataLine8Bit");
+        if ( tester.testAdd8Bit()) System.out.println("OK Add8Bit");
+        else System.out.println("NOK Add8Bit");
     }
     /**
      * @param args the command line arguments
