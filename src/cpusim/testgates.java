@@ -204,101 +204,20 @@ public class testgates {
         
         if ( false != dff.getOutput() ) return false;
 
-        // set in one clock cycle high low
-        dff.setIput(true,true,true);
-        dff.calc();
-        dff.setIput(true,false,true);
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.setIput(false,true,true);
-        dff.calc();
-        dff.setIput(false,true,true);
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        
-        dff.setIput(true,true,true);
-        dff.calc();
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.setIput(true,true,false);
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-
-        
-        dff.setIput(false, true, true);
-        dff.calc();
-        dff.calc();
-        dff.calc();
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        
-        // changing CLK
-        dff.setIput(false, false, true);
-        dff.calc();
-        dff.setIput(false, true, true);
-        dff.calc();
-        dff.setIput(false, false, true);
-        dff.calc();
+        dff.setIput(false,true);
+        dff.clkCycle();
         if ( false != dff.getOutput() ) return false;
 
-        // store true
-        dff.setIput(true, false, false);
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.setIput(true, true, false);
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.setIput(true, false, false);
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.calc();
-        if ( false != dff.getOutput() ) return false;
-        dff.setIput(true, true, true);
-        dff.calc();
+        dff.setIput(true,true);
+        dff.clkCycle();
         if ( true != dff.getOutput() ) return false;
-        dff.calc();
+        dff.clkCycle();
         if ( true != dff.getOutput() ) return false;
-        dff.calc();
+
+        dff.setIput(false,false);
+        dff.clkCycle();
         if ( true != dff.getOutput() ) return false;
-        dff.setIput(true, false, true);
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.setIput(true, true, true);
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.setIput(true, true, false);
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.setIput(false, true, false);
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.setIput(false, false, false);
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
-        dff.calc();
-        if ( true != dff.getOutput() ) return false;
+        
 
         return true;
     }
@@ -359,26 +278,23 @@ public class testgates {
     public boolean testRegister8Bit() {
         DataLine8Bit in  = new DataLine8Bit();
         DataLine8Bit out = new DataLine8Bit();
-        DataLine1Bit clk  = new DataLine1Bit();
         DataLine1Bit enable = new DataLine1Bit();
-        Register8Bit reg = new Register8Bit(in, out, clk, enable);
+        Register8Bit reg = new Register8Bit(in, out, enable);
         in.setBitsInt(200);
-        clk.setPin(0, true);
         enable.setPin(0, true);        
         if ( 0 != out.getBitsInt() ) return false;
 
-        reg.calc();
+        reg.clkCycle();
         if ( 200 != out.getBitsInt() ) return false;
 
-        clk.setPin(0, false);
-        reg.calc();
+        reg.clkCycle();
         int ret = out.getBitsInt();
         if ( 200 != out.getBitsInt() ) return false;
 
         enable.setPin(0, false);        
-        reg.calc();
-        reg.calc();
-        reg.calc();
+        reg.clkCycle();
+        reg.clkCycle();
+        reg.clkCycle();
         if ( 200 != out.getBitsInt() ) return false;
 
         
@@ -446,20 +362,32 @@ public class testgates {
         DataLine8Bit PCoutLine = new DataLine8Bit();
         DataLine1Bit PCselectLine = new DataLine1Bit();
         DataLine1Bit PCloadLine = new DataLine1Bit();
-        DataLine1Bit clkLine = new DataLine1Bit();
         
         ProgramCounter8Bit cnt = new ProgramCounter8Bit(
-                PCinLine, PCoutLine, PCselectLine, PCloadLine, clkLine);
+                PCinLine, PCoutLine, PCselectLine, PCloadLine);
         
-        //normal count increment
-        int ret = PCoutLine.getBitsInt();
+        PCinLine.setBitsInt(123);
+        //enable store count state
         PCloadLine.setPin(0, true);
-        clkLine.setPin(0, true);
-        cnt.calc();
-        clkLine.setPin(0, true);
-        ret = PCoutLine.getBitsInt();
-        cnt.calc();
-        ret = PCoutLine.getBitsInt();
+        //use counter
+        PCselectLine.setPin(0, false);
+        cnt.clkCycle();
+        cnt.clkCycle();
+        cnt.clkCycle();
+        cnt.clkCycle();
+        if ( 4 != PCoutLine.getBitsInt() ) return false;
+        PCloadLine.setPin(0, false);
+        cnt.clkCycle();
+        cnt.clkCycle();
+        if ( 4 != PCoutLine.getBitsInt() ) return false;
+        PCselectLine.setPin(0, true);
+        cnt.clkCycle();
+        int ret = PCoutLine.getBitsInt() ;
+        if ( 4 != PCoutLine.getBitsInt() ) return false;
+        PCloadLine.setPin(0, true);
+        cnt.clkCycle();
+        ret = PCoutLine.getBitsInt() ;
+        if ( 123 != PCoutLine.getBitsInt() ) return false;
         
         return true;
     }
