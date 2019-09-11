@@ -40,5 +40,6 @@ public class Or8x {
         or6.calc();
         or7.setInput(or5.getOutput(), or6.getOutput());        
         or7.calc();
+        out.setPin(0, or7.getOutput());
     }
 }

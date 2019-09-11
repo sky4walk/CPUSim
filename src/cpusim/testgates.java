@@ -203,6 +203,18 @@ public class testgates {
         DFlipFlop dff = new DFlipFlop();
         
         if ( false != dff.getOutput() ) return false;
+
+        // set in one clock cycle high low
+        dff.setIput(true,true,true);
+        dff.calc();
+        dff.setIput(true,false,true);
+        dff.calc();
+        if ( false != dff.getOutput() ) return false;
+        dff.setIput(false,true,true);
+        dff.calc();
+        dff.setIput(false,true,true);
+        dff.calc();
+        if ( true != dff.getOutput() ) return false;
         
         dff.setIput(true,true,true);
         dff.calc();
@@ -369,6 +381,85 @@ public class testgates {
         reg.calc();
         if ( 200 != out.getBitsInt() ) return false;
 
+        
+        return true;
+    }
+    public boolean testOr8x() {
+        DataLine8Bit in  = new DataLine8Bit();
+        DataLine1Bit out = new DataLine1Bit();
+        Or8x or = new Or8x(in, out);
+        in.setBitsInt(0);
+        or.calc();
+        if ( false != out.getPin(0) ) return false;
+        
+        for ( int i = 1; i < 256; i++ ) {
+            in.setBitsInt(i);
+            or.calc();
+            if ( true != out.getPin(0) ) return false;
+        }
+        return true;
+    }
+    public boolean testAnd3x() {
+        And3x and = new And3x();
+        
+        and.setInput(false, false, false);
+        if ( false != and.getOutput() ) return false;
+        and.setInput(false, false, true);
+        if ( false != and.getOutput() ) return false;
+        and.setInput(false, true, false);
+        if ( false != and.getOutput() ) return false;
+        and.setInput(false, true, true);
+        if ( false != and.getOutput() ) return false;
+        and.setInput(true, false, false);
+        if ( false != and.getOutput() ) return false;
+        and.setInput(true, false, true);
+        if ( false != and.getOutput() ) return false;
+        and.setInput(true, true, false);
+        if ( false != and.getOutput() ) return false;
+        and.setInput(true, true, true);
+        if ( true != and.getOutput() ) return false;
+        
+        return true;
+    }
+    public boolean testMux8Bit2x() {
+        DataLine8Bit in1Line = new DataLine8Bit();
+        DataLine8Bit in2Line = new DataLine8Bit();
+        DataLine8Bit outLine = new DataLine8Bit();
+        DataLine1Bit sLine = new DataLine1Bit();
+        mux8Bit2x mux = new mux8Bit2x(in1Line, in2Line, outLine, sLine);
+        
+        in1Line.setBitsInt(123);
+        in2Line.setBitsInt(231);
+        
+        sLine.setPin(0, false);
+        mux.calc();
+        if ( 231 != outLine.getBitsInt() ) return false;
+        
+        sLine.setPin(0, true);
+        mux.calc();
+        if ( 123 != outLine.getBitsInt() ) return false;
+        
+        return true;        
+    }
+    public boolean testProgramCounter8Bit() {
+        DataLine8Bit PCinLine = new DataLine8Bit();
+        DataLine8Bit PCoutLine = new DataLine8Bit();
+        DataLine1Bit PCselectLine = new DataLine1Bit();
+        DataLine1Bit PCloadLine = new DataLine1Bit();
+        DataLine1Bit clkLine = new DataLine1Bit();
+        
+        ProgramCounter8Bit cnt = new ProgramCounter8Bit(
+                PCinLine, PCoutLine, PCselectLine, PCloadLine, clkLine);
+        
+        //normal count increment
+        int ret = PCoutLine.getBitsInt();
+        PCloadLine.setPin(0, true);
+        clkLine.setPin(0, true);
+        cnt.calc();
+        clkLine.setPin(0, true);
+        ret = PCoutLine.getBitsInt();
+        cnt.calc();
+        ret = PCoutLine.getBitsInt();
         
         return true;
     }

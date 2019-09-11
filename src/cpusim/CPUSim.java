@@ -37,6 +37,14 @@ public class CPUSim {
         else System.out.println("NOK Add8Bit");
         if ( tester.testRegister8Bit()) System.out.println("OK Register8Bit");
         else System.out.println("NOK Register8Bit");
+        if ( tester.testOr8x()) System.out.println("OK Or8x");
+        else System.out.println("NOK Or8x");
+        if ( tester.testAnd3x()) System.out.println("OK And3x");
+        else System.out.println("NOK And3x");
+        if ( tester.testMux8Bit2x()) System.out.println("OK Mux8Bit2x");
+        else System.out.println("NOK Mux8Bit2x");
+        if ( tester.testProgramCounter8Bit()) System.out.println("OK ProgramCounter8Bit");
+        else System.out.println("NOK ProgramCounter8Bit");
     }
     /**
      * @param args the command line arguments

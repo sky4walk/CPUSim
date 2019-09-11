@@ -17,15 +17,30 @@ public class DFlipFlop {
     private and and1 = new and();
     private or or1 = new or();
     private not not1 = new not();
+    private boolean D;
+    private boolean enable;
+    private boolean clk;
     
     DFlipFlop() {
-        this.setIput(false, true, true);
-        this.calc();
-        this.calc();
+        reset();
+    }    
+    public void reset() {
+        this.setIput(false, true);
+        clkCycle();        
+    }
+    public void setIput(boolean inD, boolean inEnable) {
+        D = inD;
+        enable = inEnable;
     }
     
-    public void setIput(boolean D, boolean CLK, boolean enable) {
-        and1.setInput(CLK, enable);
+    public void clkCycle() {
+        clk = true;
+        calc();
+        clk = false;
+        calc();
+    }
+    private void calc() {
+        and1.setInput(clk, enable);
         and1.calc();
         
         not1.setInput(D, D);
@@ -36,9 +51,7 @@ public class DFlipFlop {
         
         nand2.setInput(not1.getOutput(), and1.getOutput());
         nand2.calc();                                
-    }
-    
-    public void calc() {
+
         nand3.setInput(nand1.getOutput(), nand4.getOutput());
         nand3.calc();
         
