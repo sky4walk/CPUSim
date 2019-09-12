@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+https://itzwieseltal.wordpress.com/2018/01/23/do-it-yourself-cpu-4-prozessor/
+github@AndreBetz.de
+*/
+
 package cpusim;
 
 /**
