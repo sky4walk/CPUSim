@@ -13,28 +13,31 @@ public class demux1Bit2x {
     private not not1 = new not();
     private and and1 = new and();
     private and and2 = new and();
-    
-    demux1Bit2x() {        
+    private DataLine1Bit In;
+    private DataLine1Bit aOut;
+    private DataLine1Bit bOut;
+    private DataLine1Bit S;
+    public demux1Bit2x(
+            DataLine1Bit InLine,
+            DataLine1Bit aOutLine,
+            DataLine1Bit bOutLine,
+            DataLine1Bit SLine ) {
+        In = InLine;
+        aOut = aOutLine;
+        bOut = bOutLine;
+        S = SLine;
     }
-    
-    public void setInput(boolean a, boolean S) {
-        not1.setInput(S, S);
+    public void calc() {
+        not1.setInput(S.getPin(0), S.getPin(0));
         not1.calc();
         
-        and1.setInput(a, not1.getOutput());        
-        and2.setInput(a, S);
-    }
-    
-    public void calc() {
+        and1.setInput(In.getPin(0), not1.getOutput());        
+        and2.setInput(In.getPin(0), S.getPin(0));
+        
         and1.calc();
-        and2.calc();        
-    }
-    
-    public boolean getOutputA() {
-        return and1.getOutput();
-    }
-    
-    public boolean getOutputB() {
-        return and2.getOutput();
+        and2.calc();
+        
+        aOut.setPin(0, and1.getOutput());
+        bOut.setPin(0, and2.getOutput());
     }
 }

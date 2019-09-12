@@ -25,14 +25,16 @@ public class mux8Bit2x {
         out = outLine;
         S   = sLine;
         for ( int i = 0; i < muxArr.length; i++ ) {
-            muxArr[i] = new mux1Bit2x();
+            muxArr[i] = new mux1Bit2x(
+                    in1.getDataLine(i), 
+                    in2.getDataLine(i), 
+                    out.getDataLine(i), 
+                    S);
         }
     }
     public void calc() {
         for ( int i = 0; i < muxArr.length; i++ ) {
-            muxArr[i].setInput(in1.getPin(i), in2.getPin(i), S.getPin(0));
             muxArr[i].calc();
-            out.setPin(i, muxArr[i].getOutput());
         }
     }
 }

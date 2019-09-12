@@ -26,10 +26,12 @@ public class CPUSim {
         if ( !tester.testAdd8Bit()) System.out.println("NOK Add8Bit");
         if ( !tester.testRegister8Bit()) System.out.println("NOK Register8Bit");
         if ( !tester.testOr8x()) System.out.println("NOK Or8x");
+        if ( !tester.testNot1Bit()) System.out.println("NOK Not1Bit");
         if ( !tester.testAnd3x()) System.out.println("NOK And3x");
         if ( !tester.testMux8Bit2x()) System.out.println("NOK Mux8Bit2x");
         if ( !tester.testProgramCounter8Bit()) System.out.println("NOK ProgramCounter8Bit");
         if ( !tester.testALU8Bit()) System.out.println("NOK ALU8Bit");
+        if ( !tester.testDSBusRegister()) System.out.println("NOK DSBusRegister");
         System.out.println("test end");
     }
     /**

@@ -24,7 +24,10 @@ public class nand implements logicGate {
     }
     @Override
     public void calc() {
-        outA = !(inA & inB);
+        if ( false == inA && false == inB ) outA = true;        
+        if ( false == inA && true  == inB ) outA = true;
+        if ( true  == inA && false == inB ) outA = true;
+        if ( true  == inA && true  == inB ) outA = false;
     }
     @Override
     public boolean getOutput() {

@@ -146,56 +146,83 @@ public class testgates {
         return true;
     }
     public boolean testMux1Bit2x() {
-        mux1Bit2x mux = new mux1Bit2x();
+        DataLine1Bit aIn = new DataLine1Bit();
+        DataLine1Bit bIn = new DataLine1Bit();
+        DataLine1Bit Out = new DataLine1Bit();
+        DataLine1Bit S = new DataLine1Bit();
+
+        mux1Bit2x mux = new mux1Bit2x(aIn, bIn, Out, S);
+        aIn.setPin(0, false);
+        bIn.setPin(0, false);
+        S.setPin(0, false);
+        mux.calc();
+        if ( false != Out.getPin(0) ) return false;
+
+        aIn.setPin(0, true);
+        bIn.setPin(0, false);
+        S.setPin(0, false);
+        mux.calc();
+        if ( false != Out.getPin(0) ) return false;
         
-        mux.setInput(false, false, false);
+        aIn.setPin(0, false);
+        bIn.setPin(0, true);
+        S.setPin(0, false);
         mux.calc();
-        if ( false != mux.getOutput() ) return false;
+        if ( true != Out.getPin(0) ) return false;
 
-        mux.setInput(true, false, false);
+        aIn.setPin(0, true);
+        bIn.setPin(0, true);
+        S.setPin(0, false);
         mux.calc();
-        if ( false != mux.getOutput() ) return false;
+        if ( true != Out.getPin(0) ) return false;
+
+        aIn.setPin(0, true);
+        bIn.setPin(0, false);
+        S.setPin(0, true);
+        mux.calc();
+        if ( true != Out.getPin(0) ) return false;
+
+        aIn.setPin(0, false);
+        bIn.setPin(0, true);
+        S.setPin(0, true);
+        mux.calc();
+        if ( false != Out.getPin(0) ) return false;
         
-        mux.setInput(false, true, false);
+        aIn.setPin(0, true);
+        bIn.setPin(0, true);
+        S.setPin(0, true);
         mux.calc();
-        if ( true != mux.getOutput() ) return false;
-
-        mux.setInput(true, true, false);
-        mux.calc();
-        if ( true != mux.getOutput() ) return false;
-
-        mux.setInput(true, false, true);
-        mux.calc();
-        if ( true != mux.getOutput() ) return false;
-        
-        mux.setInput(false, true, true);
-        mux.calc();
-        if ( false != mux.getOutput() ) return false;
-
-        mux.setInput(true, true, true);
-        mux.calc();
-        if ( true != mux.getOutput() ) return false;
+        if ( true != Out.getPin(0) ) return false;
 
         return true;
     }
     public boolean testDeMux1Bit2x() {
-        demux1Bit2x dm = new demux1Bit2x();
+        DataLine1Bit In = new DataLine1Bit();
+        DataLine1Bit aOut = new DataLine1Bit();
+        DataLine1Bit bOut = new DataLine1Bit();
+        DataLine1Bit S = new DataLine1Bit();
         
-        dm.setInput(false, false);
-        dm.calc();
-        if ( false != dm.getOutputA() && false != dm.getOutputB() ) return false;
+        demux1Bit2x dm = new demux1Bit2x(In, aOut, bOut, S);
 
-        dm.setInput(false, true);
+        In.setPin(0, false);
+        S.setPin(0, false);
         dm.calc();
-        if ( false != dm.getOutputA() && false != dm.getOutputB() ) return false;
+        if ( false != aOut.getPin(0) && false != bOut.getPin(0) ) return false;
+        
+        In.setPin(0, false);
+        S.setPin(0, true);
+        dm.calc();
+        if ( false != aOut.getPin(0) && false != bOut.getPin(0) ) return false;
 
-        dm.setInput(true, false);
+        In.setPin(0, true);
+        S.setPin(0, false);
         dm.calc();
-        if (  true != dm.getOutputA() && false != dm.getOutputB() ) return false;
-
-        dm.setInput(true, true);
+        if ( true != aOut.getPin(0) && false != bOut.getPin(0) ) return false;
+        
+        In.setPin(0, true);
+        S.setPin(0, true);
         dm.calc();
-        if (  false != dm.getOutputA() && true != dm.getOutputB() ) return false;
+        if ( false != aOut.getPin(0) && true != bOut.getPin(0) ) return false;
 
         return true;
     }
@@ -315,6 +342,21 @@ public class testgates {
         }
         return true;
     }
+    public boolean testNot1Bit() {
+        DataLine1Bit In = new DataLine1Bit();
+        DataLine1Bit Out = new DataLine1Bit();
+        Not1Bit not1 = new Not1Bit(In, Out);
+        
+        In.setPin(0, false);
+        not1.calc();
+        if ( true != Out.getPin(0) ) return false;
+        
+        In.setPin(0, true);
+        not1.calc();
+        if ( false != Out.getPin(0) ) return false;
+
+        return true;
+    }
     public boolean testAnd3x() {
         And3x and = new And3x();
         
@@ -418,6 +460,21 @@ public class testgates {
         opSelectLine.setBitsInt(3);
         alu.calc();
         if ( 180 != outLine.getBitsInt() ) return false;
+        
+        return true;
+    }
+    public boolean testDSBusRegister() {
+        DataLine8Bit dataInLine = new DataLine8Bit();
+        DataLine8Bit sBusOutLine = new DataLine8Bit();
+        DataLine8Bit dBusOutLine = new DataLine8Bit();
+        DataLine1Bit rwLine = new DataLine1Bit();
+        DataLine1Bit regDstSelLine = new DataLine1Bit();
+        DataLine1Bit regSrcSelLine = new DataLine1Bit();
+        DataLine1Bit zeroFlagLine = new DataLine1Bit();
+        DataLine1Bit negativFlagLine = new DataLine1Bit();
+        DSBusRegister dsBus = new DSBusRegister(
+                dataInLine, sBusOutLine, dBusOutLine, rwLine, 
+                regDstSelLine, regSrcSelLine, zeroFlagLine, negativFlagLine);
         
         return true;
     }
