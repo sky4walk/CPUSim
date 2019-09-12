@@ -27,7 +27,7 @@ public class And8Bit {
     }
     public void calc() {
         for ( int i = 0; i < andArr.length; i++ ) {
-            andArr[i].setInput(aIn.getPin(0), bIn.getPin(0));
+            andArr[i].setInput(aIn.getPin(i), bIn.getPin(i));
             andArr[i].calc();
             cOut.setPin(i, andArr[i].getOutput());
         } 

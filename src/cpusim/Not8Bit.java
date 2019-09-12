@@ -24,7 +24,7 @@ public class Not8Bit {
     }
     public void calc() {
         for ( int i = 0; i < notArr.length; i++ ) {
-            notArr[i].setInput(aIn.getPin(0), aIn.getPin(0));
+            notArr[i].setInput(aIn.getPin(i), aIn.getPin(i));
             notArr[i].calc();
             cOut.setPin(i, notArr[i].getOutput());
         } 

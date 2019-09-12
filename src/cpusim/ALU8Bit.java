@@ -14,8 +14,8 @@ public class ALU8Bit {
     private DataLine8Bit inB;
     private DataLine8Bit out;
     private DataLine2Bit opSelect;
-    private DataLine1Bit uOne;
-    private DataLine1Bit uZero;
+    private DataLine1Bit uOne = new DataLine1Bit();
+    private DataLine1Bit uZero = new DataLine1Bit();
     private Add8Bit add1;
     private Add8Bit sub1;
     private Not8Bit not1;
@@ -39,7 +39,9 @@ public class ALU8Bit {
         inA = inALine;
         inB = inBLine;
         out = outLine;
-        opSelect = opSelectLine;        
+        opSelect = opSelectLine;
+        uZero.setPin(0, false);
+        uOne.setPin(0, true);
         not1 = new Not8Bit(inB, lineNotSub);
         add1 = new Add8Bit(inA, inB, lineAddMux1, uZero, new DataLine1Bit());
         sub1 = new Add8Bit(inA, lineNotSub, lineSubMux1, uOne, new DataLine1Bit());

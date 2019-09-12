@@ -391,4 +391,34 @@ public class testgates {
         
         return true;
     }
+    public boolean testALU8Bit() {
+        DataLine8Bit inALine = new DataLine8Bit();
+        DataLine8Bit inBLine = new DataLine8Bit();
+        DataLine8Bit outLine = new DataLine8Bit();
+        DataLine2Bit opSelectLine = new DataLine2Bit();
+        ALU8Bit alu = new ALU8Bit(inALine, inBLine, outLine, opSelectLine);
+
+        //or
+        inALine.setBitsString("11001100");
+        inBLine.setBitsString("10000101");
+        opSelectLine.setBitsInt(0);
+        alu.calc();
+        if ( outLine.getBitsString().compareTo("11001101") != 0 ) return false;
+        //and
+        opSelectLine.setBitsInt(1);
+        alu.calc();
+        if ( outLine.getBitsString().compareTo("10000100") != 0 ) return false;
+        // sub
+        inALine.setBitsInt(123);
+        inBLine.setBitsInt(57);
+        opSelectLine.setBitsInt(2);
+        alu.calc();
+        if ( 66 != outLine.getBitsInt() ) return false;                
+        // add
+        opSelectLine.setBitsInt(3);
+        alu.calc();
+        if ( 180 != outLine.getBitsInt() ) return false;
+        
+        return true;
+    }
 }

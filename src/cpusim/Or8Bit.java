@@ -27,7 +27,7 @@ public class Or8Bit {
     }
     public void calc() {
         for ( int i = 0; i < orArr.length; i++ ) {
-            orArr[i].setInput(aIn.getPin(0), bIn.getPin(0));
+            orArr[i].setInput(aIn.getPin(i), bIn.getPin(i));
             orArr[i].calc();
             cOut.setPin(i, orArr[i].getOutput());
         } 
