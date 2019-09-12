@@ -217,12 +217,12 @@ public class testgates {
         In.setPin(0, true);
         S.setPin(0, false);
         dm.calc();
-        if ( true != aOut.getPin(0) && false != bOut.getPin(0) ) return false;
+        if ( false != aOut.getPin(0) && true != bOut.getPin(0) ) return false;
         
         In.setPin(0, true);
         S.setPin(0, true);
         dm.calc();
-        if ( false != aOut.getPin(0) && true != bOut.getPin(0) ) return false;
+        if ( true != aOut.getPin(0) && false != bOut.getPin(0) ) return false;
 
         return true;
     }
@@ -476,6 +476,52 @@ public class testgates {
                 dataInLine, sBusOutLine, dBusOutLine, rwLine, 
                 regDstSelLine, regSrcSelLine, zeroFlagLine, negativFlagLine);
         
+        dataInLine.setBitsString("10011001");
+        // write
+        rwLine.setPin(0, true);
+        // DBus Register 1
+        regDstSelLine.setPin(0, true);
+        // SBus Register 1
+        regSrcSelLine.setPin(0, false);
+        dsBus.clkCycle();
+        
+        if ( dBusOutLine.getBitsString().compareTo(dataInLine.getBitsString()) != 0 ) return false;
+        if ( sBusOutLine.getBitsString().compareTo("00000000") != 0 ) return false;
+        if ( false != zeroFlagLine.getPin(0) ) return false;
+        if ( true != negativFlagLine.getPin(0) ) return false;
+        
+        return true;
+    }
+    public boolean testMux8Bit4x() {
+        DataLine8Bit In1Line = new DataLine8Bit();
+        DataLine8Bit In2Line = new DataLine8Bit();
+        DataLine8Bit In3Line = new DataLine8Bit();
+        DataLine8Bit In4Line = new DataLine8Bit();
+        DataLine8Bit OutLine = new DataLine8Bit();
+        DataLine2Bit SLine   = new DataLine2Bit();
+        mux8Bit4x mux = new mux8Bit4x(
+                In1Line, In2Line, In3Line, In4Line, OutLine, SLine );
+        
+        In1Line.setBitsInt(2);
+        In2Line.setBitsInt(8);
+        In3Line.setBitsInt(16);
+        In4Line.setBitsInt(32);
+        SLine.setBitsInt(0);
+        mux.calc();
+        if ( 32 != OutLine.getBitsInt() ) return false;
+
+        SLine.setBitsInt(1);
+        mux.calc();
+        if ( 16 != OutLine.getBitsInt() ) return false;
+
+        SLine.setBitsInt(2);
+        mux.calc();
+        if ( 8 != OutLine.getBitsInt() ) return false;
+
+        SLine.setBitsInt(3);
+        mux.calc();
+        if ( 2 != OutLine.getBitsInt() ) return false;
+
         return true;
     }
 }

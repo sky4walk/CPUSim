@@ -55,7 +55,7 @@ public class DSBusRegister {
         not1 = new Not1Bit(orNot, zeroFlag);
     }
     public void clkCycle() {
-        demux.calc();
+        demux.calc();       
         reg1.clkCycle();
         reg2.clkCycle();
         muxDbus.calc();
