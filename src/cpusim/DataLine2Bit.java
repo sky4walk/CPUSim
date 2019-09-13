@@ -39,6 +39,11 @@ public class DataLine2Bit {
         }
         return null;        
     }
+    public void setDataLine(int nr, DataLine1Bit line) {
+        if ( nr < lines.length ) {
+            lines[nr] = line;
+        }
+    }
     public void setPins(DataLine1Bit bits) {
         for ( int i = 0; i < lines.length; i++ ) {
             setPin(i,bits.getPin(i));

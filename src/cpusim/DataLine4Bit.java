@@ -1,17 +1,17 @@
 /*
-https://itzwieseltal.wordpress.com/2018/01/23/do-it-yourself-cpu-4-prozessor/
-github@AndreBetz.de
-*/
-
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cpusim;
 
 /**
  *
- * @author andre
+ * @author betzan8u
  */
-public class DataLine8Bit {
-    private DataLine1Bit lines[] = new DataLine1Bit[8];
-    public DataLine8Bit() {
+public class DataLine4Bit {
+    private DataLine1Bit lines[] = new DataLine1Bit[4];
+    public DataLine4Bit() {
         for ( int i = 0; i < lines.length; i++ ) {
             lines[i] = new DataLine1Bit();
         }
@@ -97,3 +97,4 @@ public class DataLine8Bit {
         if ( exp <= val ) reset();
     } 
 }
+
