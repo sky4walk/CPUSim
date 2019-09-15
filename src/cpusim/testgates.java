@@ -162,13 +162,13 @@ public class testgates {
         bIn.setPin(0, false);
         S.setPin(0, false);
         mux.calc();
-        if ( false != Out.getPin(0) ) return false;
+        if ( true != Out.getPin(0) ) return false;
         
         aIn.setPin(0, false);
         bIn.setPin(0, true);
         S.setPin(0, false);
         mux.calc();
-        if ( true != Out.getPin(0) ) return false;
+        if ( false != Out.getPin(0) ) return false;
 
         aIn.setPin(0, true);
         bIn.setPin(0, true);
@@ -180,13 +180,13 @@ public class testgates {
         bIn.setPin(0, false);
         S.setPin(0, true);
         mux.calc();
-        if ( true != Out.getPin(0) ) return false;
+        if ( false != Out.getPin(0) ) return false;
 
         aIn.setPin(0, false);
         bIn.setPin(0, true);
         S.setPin(0, true);
         mux.calc();
-        if ( false != Out.getPin(0) ) return false;
+        if ( true != Out.getPin(0) ) return false;
         
         aIn.setPin(0, true);
         bIn.setPin(0, true);
@@ -217,12 +217,12 @@ public class testgates {
         In.setPin(0, true);
         S.setPin(0, false);
         dm.calc();
-        if ( false != aOut.getPin(0) && true != bOut.getPin(0) ) return false;
+        if ( true != aOut.getPin(0) && false != bOut.getPin(0) ) return false;
         
         In.setPin(0, true);
         S.setPin(0, true);
         dm.calc();
-        if ( true != aOut.getPin(0) && false != bOut.getPin(0) ) return false;
+        if ( false != aOut.getPin(0) && true != bOut.getPin(0) ) return false;
 
         return true;
     }
@@ -391,11 +391,11 @@ public class testgates {
         
         sLine.setPin(0, false);
         mux.calc();
-        if ( 231 != outLine.getBitsInt() ) return false;
+        if ( 123 != outLine.getBitsInt() ) return false;
         
         sLine.setPin(0, true);
         mux.calc();
-        if ( 123 != outLine.getBitsInt() ) return false;
+        if ( 231 != outLine.getBitsInt() ) return false;
         
         return true;        
     }
@@ -412,7 +412,7 @@ public class testgates {
         //enable store count state
         PCloadLine.setPin(0, true);
         //use counter
-        PCselectLine.setPin(0, false);
+        PCselectLine.setPin(0, true);
         cnt.clkCycle();
         cnt.clkCycle();
         cnt.clkCycle();
@@ -422,13 +422,11 @@ public class testgates {
         cnt.clkCycle();
         cnt.clkCycle();
         if ( 4 != PCoutLine.getBitsInt() ) return false;
-        PCselectLine.setPin(0, true);
+        PCselectLine.setPin(0, false);
         cnt.clkCycle();
-        int ret = PCoutLine.getBitsInt() ;
         if ( 4 != PCoutLine.getBitsInt() ) return false;
         PCloadLine.setPin(0, true);
         cnt.clkCycle();
-        ret = PCoutLine.getBitsInt() ;
         if ( 123 != PCoutLine.getBitsInt() ) return false;
         
         return true;
@@ -440,26 +438,26 @@ public class testgates {
         DataLine2Bit opSelectLine = new DataLine2Bit();
         ALU8Bit alu = new ALU8Bit(inALine, inBLine, outLine, opSelectLine);
 
-        //or
-        inALine.setBitsString("11001100");
-        inBLine.setBitsString("10000101");
-        opSelectLine.setBitsInt(0);
-        alu.calc();
-        if ( outLine.getBitsString().compareTo("11001101") != 0 ) return false;
-        //and
-        opSelectLine.setBitsInt(1);
-        alu.calc();
-        if ( outLine.getBitsString().compareTo("10000100") != 0 ) return false;
-        // sub
+        // add
         inALine.setBitsInt(123);
         inBLine.setBitsInt(57);
+        opSelectLine.setBitsInt(0);
+        alu.calc();
+        if ( 180 != outLine.getBitsInt() ) return false;                
+        // sub
+        opSelectLine.setBitsInt(1);
+        alu.calc();
+        if ( 66 != outLine.getBitsInt() ) return false;
+        //add
+        inALine.setBitsString("11001100");
+        inBLine.setBitsString("10000101");
         opSelectLine.setBitsInt(2);
         alu.calc();
-        if ( 66 != outLine.getBitsInt() ) return false;                
-        // add
+        if ( outLine.getBitsString().compareTo("10000100") != 0 ) return false;
+        //or
         opSelectLine.setBitsInt(3);
         alu.calc();
-        if ( 180 != outLine.getBitsInt() ) return false;
+        if ( outLine.getBitsString().compareTo("11001101") != 0 ) return false;
         
         return true;
     }
@@ -508,20 +506,80 @@ public class testgates {
         In4Line.setBitsInt(32);
         SLine.setBitsInt(0);
         mux.calc();
-        if ( 32 != OutLine.getBitsInt() ) return false;
+        if ( 2 != OutLine.getBitsInt() ) return false;
 
         SLine.setBitsInt(1);
         mux.calc();
-        if ( 16 != OutLine.getBitsInt() ) return false;
+        if ( 8 != OutLine.getBitsInt() ) return false;
 
         SLine.setBitsInt(2);
         mux.calc();
-        if ( 8 != OutLine.getBitsInt() ) return false;
+        if ( 16 != OutLine.getBitsInt() ) return false;
 
         SLine.setBitsInt(3);
         mux.calc();
-        if ( 2 != OutLine.getBitsInt() ) return false;
+        if ( 32 != OutLine.getBitsInt() ) return false;
 
         return true;
     }
+    public boolean testDemux1Bit4x() {
+        DataLine1Bit InLine = new DataLine1Bit();
+        DataLine2Bit SLine = new DataLine2Bit();
+        DataLine1Bit OutLine[] = new DataLine1Bit[4];       
+        for ( int i = 0; i < OutLine.length; i++ ) {
+            OutLine[i] = new DataLine1Bit();
+        }
+        demux1Bit4x dm = new demux1Bit4x(InLine, SLine, OutLine);
+        InLine.setPin(0, true);
+        for ( int i = 0; i < OutLine.length; i++ ) {
+            SLine.setBitsInt(i);
+            dm.calc();
+            if ( true != OutLine[i].getPin(0) ) return false;
+        }
+        return true;
+    }
+    public boolean testDemux1Bit16x() {
+        DataLine1Bit InLine = new DataLine1Bit();
+        DataLine4Bit SLine = new DataLine4Bit();
+        DataLine1Bit OutLine[] = new DataLine1Bit[16];
+        for ( int i = 0; i < OutLine.length; i++ ) {
+            OutLine[i] = new DataLine1Bit();
+        }
+        demux1Bit16x dm = new demux1Bit16x(InLine, SLine, OutLine);
+        InLine.setPin(0, true);
+        for ( int i = 0; i < OutLine.length; i++ ) {
+            SLine.setBitsInt(i);
+            dm.calc();
+            for ( int j = 0; j < OutLine.length; j++ ) {
+                if ( i == j ) { 
+                    if ( true != OutLine[j].getPin(0) ) return false;
+                } else {
+                    if ( false != OutLine[j].getPin(0) ) return false;                    
+                }
+            }
+        }
+        return true;
+    }
+    public boolean testDemux1Bit256x() {
+        DataLine1Bit InLine = new DataLine1Bit();
+        DataLine8Bit SLine = new DataLine8Bit();
+        DataLine1Bit OutLine[] = new DataLine1Bit[256];
+        for ( int i = 0; i < OutLine.length; i++ ) {
+            OutLine[i] = new DataLine1Bit();
+        }
+        demux1Bit256x dm = new demux1Bit256x(InLine, SLine, OutLine);
+        InLine.setPin(0, true);
+        for ( int i = 0; i < OutLine.length; i++ ) {
+            SLine.setBitsInt(i);
+            dm.calc();
+            for ( int j = 0; j < OutLine.length; j++ ) {
+                if ( i == j ) { 
+                    if ( true != OutLine[j].getPin(0) ) return false;
+                } else {
+                    if ( false != OutLine[j].getPin(0) ) return false;                    
+                }
+            }
+        }
+        return true;
+    }    
 }

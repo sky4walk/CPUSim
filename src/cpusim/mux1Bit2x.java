@@ -35,10 +35,10 @@ public class mux1Bit2x {
         not1.setInput(S.getPin(0), S.getPin(0));
         not1.calc();
         
-        and1.setInput(aIn.getPin(0), S.getPin(0));
+        and1.setInput(aIn.getPin(0), not1.getOutput());
         and1.calc();
         
-        and2.setInput(bIn.getPin(0), not1.getOutput());
+        and2.setInput(bIn.getPin(0), S.getPin(0));
         and2.calc();                
 
         or1.setInput(and1.getOutput(), and2.getOutput());

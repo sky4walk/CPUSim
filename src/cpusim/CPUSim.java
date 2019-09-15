@@ -33,6 +33,9 @@ public class CPUSim {
         if ( !tester.testALU8Bit()) System.out.println("NOK ALU8Bit");
         if ( !tester.testDSBusRegister()) System.out.println("NOK DSBusRegister");
         if ( !tester.testMux8Bit4x()) System.out.println("NOK Mux8Bit4x");
+        if ( !tester.testDemux1Bit4x()) System.out.println("NOK Demux1Bit4x");
+        if ( !tester.testDemux1Bit16x()) System.out.println("NOK Demux1Bit16x");
+        if ( !tester.testDemux1Bit256x()) System.out.println("NOK Demux1Bit256x");
         System.out.println("test end");
     }
     /**

@@ -37,7 +37,7 @@ public class demux1Bit2x {
         and1.calc();
         and2.calc();
         
-        aOut.setPin(0, and2.getOutput());
-        bOut.setPin(0, and1.getOutput());
+        aOut.setPin(0, and1.getOutput());
+        bOut.setPin(0, and2.getOutput());
     }
 }

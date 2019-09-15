@@ -1,7 +1,7 @@
 /*
-https://itzwieseltal.wordpress.com/2018/01/23/do-it-yourself-cpu-4-prozessor/
-github@AndreBetz.de
-*/
+ * https://itzwieseltal.wordpress.com/2018/01/23/do-it-yourself-cpu-4-prozessor/
+ * github@AndreBetz.de
+ */
 
 package cpusim;
 
@@ -38,10 +38,7 @@ public class ProgramCounter8Bit {
     }
     public void clkCycle() {
         add.calc();
-        int ret = lineMuxAdd.getBitsInt();
         mux.calc();
-        ret = lineRegMux.getBitsInt();
         reg.clkCycle();
-        ret = PCout.getBitsInt();
     }
 }

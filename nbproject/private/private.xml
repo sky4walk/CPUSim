@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/DataLine4Bit.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/demux1Bit16x.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/DataLine8Bit.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/testgates.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/DataLine2Bit.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/CPUSim.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/demux1Bit4x.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/DSBusRegister.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/testgates.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/demux1Bit4x.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/demux1Bit16x.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/demux1Bit2x.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/demux1Bit256x.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CPUSim.java</file>
         </group>
     </open-files>
 </project-private>
