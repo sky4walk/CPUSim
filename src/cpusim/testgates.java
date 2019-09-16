@@ -613,5 +613,9 @@ public class testgates {
             if ( i != Out.getBitsInt() ) return false;
         }
         return true;
-     }
+    }
+    public boolean testRAM8Bit() {
+        return true;
+    }
+
 }
