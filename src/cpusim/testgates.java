@@ -324,6 +324,8 @@ public class testgates {
         reg.clkCycle();
         if ( 200 != out.getBitsInt() ) return false;
 
+        reg.write(178);
+        if ( 178 != reg.read().getBitsInt() ) return false;
         
         return true;
     }
@@ -615,6 +617,18 @@ public class testgates {
         return true;
     }
     public boolean testRAM8Bit() {
+        DataLine8Bit DataInLine = new DataLine8Bit();
+        DataLine8Bit DataOutLine = new DataLine8Bit();
+        DataLine8Bit AdressLine = new DataLine8Bit();
+        DataLine1Bit rwLine = new DataLine1Bit();
+        RAM8Bit ram = new RAM8Bit(DataInLine, DataOutLine, AdressLine, rwLine);
+        rwLine.setPin(0, true);
+        for ( int i = 0; i < 256; i++ ) {
+            DataInLine.setBitsInt(i);
+            AdressLine.setBitsInt(i);
+            ram.clkCycle();
+            if ( i != DataOutLine.getBitsInt() ) return false;
+        }        
         return true;
     }
 

@@ -34,4 +34,16 @@ public class Register8Bit {
             out.setPin(i, flipFlop[i].getOutput());
         }
     }
+    public void write(int dat) {
+        DataLine8Bit input = new DataLine8Bit();
+        input.setBitsInt(dat);
+        for ( int i = 0; i < flipFlop.length; i++ ) {
+            flipFlop[i].setIput(input.getPin(i), true);
+            flipFlop[i].clkCycle();
+            out.setPin(i, flipFlop[i].getOutput());
+        }
+    }
+    public DataLine8Bit read() {
+        return out;
+    }
 }

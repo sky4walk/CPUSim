@@ -5,9 +5,9 @@
         <group>
             <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/RAM8Bit.java</file>
             <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/testgates.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/mux8Bit256x.java</file>
             <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/CPUSim.java</file>
-            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/mux8Bit16x.java</file>
+            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/DSBusRegALU.java</file>
+            <file>file:/C:/Users/betzan8u/PortableApps/PortableGit/projects/CPUSim/src/cpusim/DSBusRegister.java</file>
         </group>
     </open-files>
 </project-private>
