@@ -36,6 +36,7 @@ public class CPUSim {
         if ( !tester.testDemux1Bit4x()) System.out.println("NOK Demux1Bit4x");
         if ( !tester.testDemux1Bit16x()) System.out.println("NOK Demux1Bit16x");
         if ( !tester.testDemux1Bit256x()) System.out.println("NOK Demux1Bit256x");
+        if ( !tester.testMux1Bit16x()) System.out.println("NOK Mux1Bit16x");
         System.out.println("test end");
     }
     /**

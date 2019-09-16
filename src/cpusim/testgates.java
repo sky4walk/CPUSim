@@ -581,5 +581,21 @@ public class testgates {
             }
         }
         return true;
-    }    
+    }
+     public boolean testMux1Bit16x() {
+        DataLine8Bit In[] = new DataLine8Bit[16];
+        DataLine8Bit Out = new DataLine8Bit();
+        DataLine4Bit S = new DataLine4Bit();
+        for ( int i = 0; i < In.length; i++ ) {
+            In[i] = new DataLine8Bit();
+            In[i].setBitsInt(i*2);
+        }
+        mux8Bit16x mux = new mux8Bit16x(In, Out, S);
+        for ( int i = 0; i < In.length; i++ ) {
+            S.setBitsInt(i);
+            mux.calc();
+            if ( i*2 != Out.getBitsInt() ) return false;
+        }
+        return true;
+     }
 }
