@@ -53,9 +53,9 @@ public class DataLine8Bit {
         String bits = "";
         for ( int i = 0; i < lines.length; i++ ) {
             if ( getPin(lines.length - 1 - i) ) {
-                bits += "1";
+                bits += nand.getState(true);
             } else {
-                bits += "0";
+                bits += nand.getState(false);
             }
         }
         return bits;
