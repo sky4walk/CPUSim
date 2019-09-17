@@ -12,14 +12,14 @@ public class DSBusRegALU {
     private ALU8Bit alu;
     private mux8Bit4x mux;
     private DSBusRegister dsBus;
-    private DataLine8Bit muxReg = new DataLine8Bit();
-    private DataLine8Bit regAluDbus = new DataLine8Bit();
-    private DataLine8Bit regAluSBus = new DataLine8Bit();
     private DataLine8Bit aluMux = new DataLine8Bit();
     
     public DSBusRegALU(
             DataLine8Bit Immediat,
             DataLine8Bit DataIn,
+            DataLine8Bit DataOut,
+            DataLine8Bit sBusOut,
+            DataLine8Bit dBusOut,
             DataLine2Bit RegSel,
             DataLine1Bit sRegSel,
             DataLine1Bit dRegSel,
@@ -28,17 +28,17 @@ public class DSBusRegALU {
             DataLine1Bit flagZero,
             DataLine1Bit flagNeg ) {
         mux = new mux8Bit4x(
-                Immediat, regAluDbus, DataIn, aluMux, muxReg, RegSel);
+                Immediat, sBusOut, DataIn, aluMux, DataOut, RegSel);
         dsBus = new DSBusRegister(
-                muxReg, 
-                regAluSBus, 
-                regAluDbus, 
+                DataOut, 
+                sBusOut, 
+                dBusOut, 
                 RegWrite, 
                 dRegSel, 
                 sRegSel, 
                 flagZero, 
                 flagNeg);
-        alu = new ALU8Bit(regAluDbus, regAluSBus, aluMux, opSel);        
+        alu = new ALU8Bit(dBusOut, sBusOut, aluMux, opSel);        
     }
     public void clkCycle() {
         mux.calc();

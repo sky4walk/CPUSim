@@ -481,7 +481,7 @@ public class testgates {
         rwLine.setPin(0, true);
         // DBus Register 1
         regDstSelLine.setPin(0, true);
-        // SBus Register 1
+        // SBus Register 0
         regSrcSelLine.setPin(0, false);
         dsBus.clkCycle();
         
@@ -631,5 +631,34 @@ public class testgates {
         }        
         return true;
     }
-
+    public boolean testDSBusRegALU() {
+        DataLine8Bit Immediat = new DataLine8Bit();
+        DataLine8Bit DataIn = new DataLine8Bit();
+        DataLine8Bit DataOut = new DataLine8Bit();
+        DataLine8Bit sBusOut = new DataLine8Bit();
+        DataLine8Bit dBusOut = new DataLine8Bit();
+        DataLine2Bit RegSel = new DataLine2Bit();
+        DataLine1Bit sRegSel = new DataLine1Bit();
+        DataLine1Bit dRegSel = new DataLine1Bit();
+        DataLine2Bit opSel = new DataLine2Bit();
+        DataLine1Bit RegWrite = new DataLine1Bit();
+        DataLine1Bit flagZero = new DataLine1Bit();
+        DataLine1Bit flagNeg = new DataLine1Bit();
+        
+        DSBusRegALU aluReg = new DSBusRegALU(
+                Immediat, DataIn, 
+                DataOut, sBusOut, dBusOut, 
+                RegSel, sRegSel, dRegSel, 
+                opSel, RegWrite, 
+                flagZero, flagNeg);
+        
+        DataIn.setBitsInt(17);
+        RegSel.setBitsInt(2); // DataIn 
+        RegWrite.setPin(0, true); // write
+        dRegSel.setPin(0, false); // Register 0
+        aluReg.clkCycle(); // store data to reg 0
+        
+        
+        return true;
+    }
 }

@@ -39,6 +39,7 @@ public class CPUSim {
         if ( !tester.testMux1Bit16x()) System.out.println("NOK Mux1Bit16x");
         if ( !tester.testMux1Bit256x()) System.out.println("NOK Mux1Bit256x");
         if ( !tester.testRAM8Bit()) System.out.println("NOK RAM8Bit");
+        if ( !tester.testDSBusRegALU()) System.out.println("NOK DSBusRegALU");
         System.out.println("test end");
     }
     /**
