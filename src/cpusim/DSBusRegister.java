@@ -64,4 +64,10 @@ public class DSBusRegister {
         not1.calc();
         negativFlag.setPin(0, dBusOut.getPin(7));
     }
+    public DataLine8Bit getDebugSBus() {
+        return sBusOut;
+    }
+    public DataLine8Bit getDebugDBus() {
+        return dBusOut;
+    }
 }

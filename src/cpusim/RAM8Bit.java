@@ -49,10 +49,10 @@ public class RAM8Bit {
             regs[adr].write(dat);
         }
     }
-    public DataLine8Bit read(int adr) {
+    public int read(int adr) {
         if ( adr < regs.length ) {
             return regs[adr].read();
         }
-        return null;
+        return 0;
     }
 }

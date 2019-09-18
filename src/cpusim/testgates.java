@@ -325,7 +325,7 @@ public class testgates {
         if ( 200 != out.getBitsInt() ) return false;
 
         reg.write(178);
-        if ( 178 != reg.read().getBitsInt() ) return false;
+        if ( 178 != reg.read() ) return false;
         
         return true;
     }
@@ -450,7 +450,7 @@ public class testgates {
         opSelectLine.setBitsInt(1);
         alu.calc();
         if ( 66 != outLine.getBitsInt() ) return false;
-        //add
+        //and
         inALine.setBitsString("11001100");
         inBLine.setBitsString("10000101");
         opSelectLine.setBitsInt(2);
@@ -634,7 +634,7 @@ public class testgates {
     public boolean testDSBusRegALU() {
         DataLine8Bit Immediat = new DataLine8Bit();
         DataLine8Bit DataIn = new DataLine8Bit();
-        DataLine8Bit DataOut = new DataLine8Bit();
+        DataLine8Bit DataBus = new DataLine8Bit();
         DataLine8Bit sBusOut = new DataLine8Bit();
         DataLine8Bit dBusOut = new DataLine8Bit();
         DataLine2Bit RegSel = new DataLine2Bit();
@@ -647,7 +647,7 @@ public class testgates {
         
         DSBusRegALU aluReg = new DSBusRegALU(
                 Immediat, DataIn, 
-                DataOut, sBusOut, dBusOut, 
+                DataBus, sBusOut, dBusOut,
                 RegSel, sRegSel, dRegSel, 
                 opSel, RegWrite, 
                 flagZero, flagNeg);
@@ -656,9 +656,46 @@ public class testgates {
         RegSel.setBitsInt(2); // DataIn 
         RegWrite.setPin(0, true); // write
         dRegSel.setPin(0, false); // Register 0
+        sRegSel.setPin(0, false); // Register 0
+        opSel.setBitsInt(0); //add
         aluReg.clkCycle(); // store data to reg 0
         
+        if ( 17 != DataBus.getBitsInt() ) return false;
+        if ( 17 != dBusOut.getBitsInt() ) return false;
+        if ( 17 != sBusOut.getBitsInt() ) return false;
+        if ( 34 != aluReg.getDebugAluOut().getBitsInt() ) return false;
+
+        RegSel.setBitsInt(3); // Alu in Mux
+        RegWrite.setPin(0, false); // no write to reg
+        aluReg.clkCycle();
+        if ( 34 != DataBus.getBitsInt() ) return false;
+        if ( 17 != dBusOut.getBitsInt() ) return false;
+        if ( 17 != sBusOut.getBitsInt() ) return false;
+        if ( 34 != aluReg.getDebugAluOut().getBitsInt() ) return false;
         
+        return true;
+    }
+    public boolean testAdressInstructionRAM() {
+        DataLine8Bit sBus = new DataLine8Bit();
+        DataLine8Bit dBus = new DataLine8Bit();
+        DataLine8Bit DataInBus = new DataLine8Bit();
+        DataLine8Bit DataOutBus = new DataLine8Bit();
+        DataLine8Bit Instruction = new DataLine8Bit();
+        DataLine8Bit Immediate = new DataLine8Bit();
+        DataLine2Bit AdressSelect = new DataLine2Bit();
+        DataLine1Bit PCSelect = new DataLine1Bit();
+        DataLine1Bit PCLoad = new DataLine1Bit();
+        DataLine1Bit rw = new DataLine1Bit();
+        DataLine1Bit instructionLoad = new DataLine1Bit();
+        DataLine1Bit immediateLoad = new DataLine1Bit();
+        AdressInstructionRAM adRam = new AdressInstructionRAM(
+                sBus, dBus, DataInBus, DataOutBus, Instruction, 
+                Immediate, AdressSelect, PCSelect, PCLoad, rw, 
+                instructionLoad, immediateLoad);
+        
+        return true;
+    }
+    public boolean testDataPath() {
         return true;
     }
 }

@@ -43,7 +43,7 @@ public class Register8Bit {
             out.setPin(i, flipFlop[i].getOutput());
         }
     }
-    public DataLine8Bit read() {
-        return out;
+    public int read() {
+        return out.getBitsInt();
     }
 }

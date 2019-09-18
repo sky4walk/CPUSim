@@ -61,4 +61,7 @@ public class ALU8Bit {
         mux2.calc();
         mux3.calc();
     }
+    public DataLine8Bit getDebugAluOut() {
+        return out;
+    }
 }
