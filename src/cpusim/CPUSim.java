@@ -42,6 +42,7 @@ public class CPUSim {
         if ( !tester.testDSBusRegALU()) System.out.println("NOK DSBusRegALU");
         if ( !tester.testAdressInstructionRAM()) System.out.println("NOK AdressInstructionRAM");
         if ( !tester.testDataPath()) System.out.println("NOK DataPath");
+        if ( !tester.testCycleCounter()) System.out.println("NOK CycleCounter");
         System.out.println("test end");
     }
     /**

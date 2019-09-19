@@ -698,4 +698,56 @@ public class testgates {
     public boolean testDataPath() {
         return true;
     }
+    public boolean testCycleCounter() {
+        DataLine1Bit resetLine = new DataLine1Bit();
+        DataLine1Bit cycle1Line = new DataLine1Bit();
+        DataLine1Bit cycle2Line = new DataLine1Bit();
+        DataLine1Bit cycle3Line = new DataLine1Bit();
+        CycleCounter ccl = new CycleCounter(
+                resetLine,cycle1Line, cycle2Line, cycle3Line);
+        
+        if ( true  != cycle1Line.getPin(0) ) return false;
+        if ( false != cycle2Line.getPin(0) ) return false;
+        if ( false != cycle3Line.getPin(0) ) return false;
+
+        ccl.clkCycle();
+        
+        if ( false != cycle1Line.getPin(0) ) return false;
+        if ( true  != cycle2Line.getPin(0) ) return false;
+        if ( false != cycle3Line.getPin(0) ) return false;
+
+        ccl.clkCycle();
+
+        if ( false != cycle1Line.getPin(0) ) return false;
+        if ( false != cycle2Line.getPin(0) ) return false;
+        if ( true  != cycle3Line.getPin(0) ) return false;
+        
+        ccl.clkCycle();
+
+        if ( true  != cycle1Line.getPin(0) ) return false;
+        if ( false != cycle2Line.getPin(0) ) return false;
+        if ( false != cycle3Line.getPin(0) ) return false;
+
+        ccl.clkCycle();
+
+        if ( false != cycle1Line.getPin(0) ) return false;
+        if ( true  != cycle2Line.getPin(0) ) return false;
+        if ( false != cycle3Line.getPin(0) ) return false;
+
+        resetLine.setPin(0, true);
+        ccl.clkCycle();
+
+        if ( true  != cycle1Line.getPin(0) ) return false;
+        if ( false != cycle2Line.getPin(0) ) return false;
+        if ( false != cycle3Line.getPin(0) ) return false;
+
+        resetLine.setPin(0, false);
+        ccl.clkCycle();
+
+        if ( false != cycle1Line.getPin(0) ) return false;
+        if ( true  != cycle2Line.getPin(0) ) return false;
+        if ( false != cycle3Line.getPin(0) ) return false;
+        
+        return true;
+    }
 }
