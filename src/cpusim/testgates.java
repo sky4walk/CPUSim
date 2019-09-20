@@ -854,4 +854,90 @@ public class testgates {
         
         return true;
     }
+    public boolean testMux1Bit4x() {
+        DataLine1Bit x1 = new DataLine1Bit();
+        DataLine1Bit x2 = new DataLine1Bit();
+        DataLine1Bit x3 = new DataLine1Bit();
+        DataLine1Bit x4 = new DataLine1Bit();
+        DataLine1Bit out = new DataLine1Bit();
+        DataLine2Bit S = new DataLine2Bit();
+
+        mux1Bit4x mux = new mux1Bit4x(x1, x2, x3, x4, out, S);
+        x1.setPin(0, false);
+        x2.setPin(0, false);
+        x3.setPin(0, false);
+        x4.setPin(0, false);
+        S.setBitsInt(0);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+
+        x1.setPin(0, true);
+        x2.setPin(0, false);
+        x3.setPin(0, false);
+        x4.setPin(0, false);
+        S.setBitsInt(0);
+        mux.calc();
+        if ( true != out.getPin(0) ) return false;
+        S.setBitsInt(1);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(2);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(3);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+
+        x1.setPin(0, false);
+        x2.setPin(0, true);
+        x3.setPin(0, false);
+        x4.setPin(0, false);
+        S.setBitsInt(0);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(1);
+        mux.calc();
+        if ( true != out.getPin(0) ) return false;
+        S.setBitsInt(2);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(3);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        
+        x1.setPin(0, false);
+        x2.setPin(0, false);
+        x3.setPin(0, true);
+        x4.setPin(0, false);
+        S.setBitsInt(0);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(1);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(2);
+        mux.calc();
+        if ( true != out.getPin(0) ) return false;
+        S.setBitsInt(3);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        
+        x1.setPin(0, false);
+        x2.setPin(0, false);
+        x3.setPin(0, false);
+        x4.setPin(0, true);
+        S.setBitsInt(0);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(1);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(2);
+        mux.calc();
+        if ( false != out.getPin(0) ) return false;
+        S.setBitsInt(3);
+        mux.calc();
+        if ( true != out.getPin(0) ) return false;
+        return true;
+    }
 }

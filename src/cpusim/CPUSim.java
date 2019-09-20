@@ -44,6 +44,7 @@ public class CPUSim {
         if ( !tester.testDataPath()) System.out.println("NOK DataPath");
         if ( !tester.testCycleCounter()) System.out.println("NOK CycleCounter");
         if ( !tester.testInstructionDecoder()) System.out.println("NOK InstructionDecoder");
+        if ( !tester.testMux1Bit4x()) System.out.println("NOK Mux1Bit4x");
         System.out.println("test end");
     }
     /**
