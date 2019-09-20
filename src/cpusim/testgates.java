@@ -940,4 +940,52 @@ public class testgates {
         if ( true != out.getPin(0) ) return false;
         return true;
     }
+    public boolean testOr5x() {
+        DataLine1Bit x1 = new DataLine1Bit();
+        DataLine1Bit x2 = new DataLine1Bit();
+        DataLine1Bit x3 = new DataLine1Bit();
+        DataLine1Bit x4 = new DataLine1Bit();
+        DataLine1Bit x5 = new DataLine1Bit();
+        DataLine1Bit out = new DataLine1Bit();
+        Or5x or = new Or5x(x1, x2, x3, x4, x5, out);
+        or.calc();
+        if ( false != out.getPin(0) ) return false;
+        x1.setPin(0, true);
+        x2.setPin(0, false);
+        x3.setPin(0, false);
+        x4.setPin(0, false);
+        x5.setPin(0, false);
+        or.calc();
+        if ( true != out.getPin(0) ) return false;
+        x1.setPin(0, false);
+        x2.setPin(0, true);
+        x3.setPin(0, false);
+        x4.setPin(0, false);
+        x5.setPin(0, false);
+        or.calc();
+        if ( true != out.getPin(0) ) return false;
+        x1.setPin(0, false);
+        x2.setPin(0, false);
+        x3.setPin(0, true);
+        x4.setPin(0, false);
+        x5.setPin(0, false);
+        or.calc();
+        if ( true != out.getPin(0) ) return false;
+        x1.setPin(0, false);
+        x2.setPin(0, false);
+        x3.setPin(0, false);
+        x4.setPin(0, true);
+        x5.setPin(0, false);
+        or.calc();
+        if ( true != out.getPin(0) ) return false;
+        x1.setPin(0, false);
+        x2.setPin(0, false);
+        x3.setPin(0, false);
+        x4.setPin(0, false);
+        x5.setPin(0, true);
+        or.calc();
+        if ( true != out.getPin(0) ) return false;
+
+        return true;
+    }
 }
