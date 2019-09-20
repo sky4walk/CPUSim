@@ -750,4 +750,108 @@ public class testgates {
         
         return true;
     }
+    public boolean testInstructionDecoder() {
+        DataLine8Bit instructionLine = new DataLine8Bit();
+        DataLine1Bit LDRLine = new DataLine1Bit();
+        DataLine1Bit STRLine = new DataLine1Bit();
+        DataLine1Bit MR1R2Line = new DataLine1Bit();
+        DataLine1Bit JPZLine = new DataLine1Bit();
+        DataLine1Bit ANDLine = new DataLine1Bit();
+        DataLine1Bit ORLine = new DataLine1Bit();
+        DataLine1Bit ADDLine = new DataLine1Bit();
+        DataLine1Bit SUBLine = new DataLine1Bit();
+        InstructionDecoder dec = new InstructionDecoder(
+                instructionLine, LDRLine, STRLine, MR1R2Line, 
+                JPZLine, ANDLine, ORLine, ADDLine, SUBLine);
+        //LDR
+        instructionLine.setBitsInt(0);
+        dec.calc();
+        if ( true != LDRLine.getPin(0) ) return false;
+        if ( false != STRLine.getPin(0) ) return false;
+        if ( false != MR1R2Line.getPin(0) ) return false;
+        if ( false != JPZLine.getPin(0) ) return false;
+        if ( false != ANDLine.getPin(0) ) return false;
+        if ( false != ORLine.getPin(0) ) return false;
+        if ( false != ADDLine.getPin(0) ) return false;
+        if ( false != SUBLine.getPin(0) ) return false;
+        //STR
+        instructionLine.setBitsInt(1);
+        dec.calc();
+        if ( false != LDRLine.getPin(0) ) return false;
+        if ( true != STRLine.getPin(0) ) return false;
+        if ( false != MR1R2Line.getPin(0) ) return false;
+        if ( false != JPZLine.getPin(0) ) return false;
+        if ( false != ANDLine.getPin(0) ) return false;
+        if ( false != ORLine.getPin(0) ) return false;
+        if ( false != ADDLine.getPin(0) ) return false;
+        if ( false != SUBLine.getPin(0) ) return false;
+        //MR1R2
+        instructionLine.setBitsInt(2);
+        dec.calc();
+        if ( false != LDRLine.getPin(0) ) return false;
+        if ( false != STRLine.getPin(0) ) return false;
+        if ( true != MR1R2Line.getPin(0) ) return false;
+        if ( false != JPZLine.getPin(0) ) return false;
+        if ( false != ANDLine.getPin(0) ) return false;
+        if ( false != ORLine.getPin(0) ) return false;
+        if ( false != ADDLine.getPin(0) ) return false;
+        if ( false != SUBLine.getPin(0) ) return false;
+        //JPZ
+        instructionLine.setBitsInt(3);
+        dec.calc();
+        if ( false != LDRLine.getPin(0) ) return false;
+        if ( false != STRLine.getPin(0) ) return false;
+        if ( false != MR1R2Line.getPin(0) ) return false;
+        if ( true != JPZLine.getPin(0) ) return false;
+        if ( false != ANDLine.getPin(0) ) return false;
+        if ( false != ORLine.getPin(0) ) return false;
+        if ( false != ADDLine.getPin(0) ) return false;
+        if ( false != SUBLine.getPin(0) ) return false;
+        //AND
+        instructionLine.setBitsInt(4);
+        dec.calc();
+        if ( false != LDRLine.getPin(0) ) return false;
+        if ( false != STRLine.getPin(0) ) return false;
+        if ( false != MR1R2Line.getPin(0) ) return false;
+        if ( false != JPZLine.getPin(0) ) return false;
+        if ( true != ANDLine.getPin(0) ) return false;
+        if ( false != ORLine.getPin(0) ) return false;
+        if ( false != ADDLine.getPin(0) ) return false;
+        if ( false != SUBLine.getPin(0) ) return false;
+        //OR
+        instructionLine.setBitsInt(5);
+        dec.calc();
+        if ( false != LDRLine.getPin(0) ) return false;
+        if ( false != STRLine.getPin(0) ) return false;
+        if ( false != MR1R2Line.getPin(0) ) return false;
+        if ( false != JPZLine.getPin(0) ) return false;
+        if ( false != ANDLine.getPin(0) ) return false;
+        if ( true != ORLine.getPin(0) ) return false;
+        if ( false != ADDLine.getPin(0) ) return false;
+        if ( false != SUBLine.getPin(0) ) return false;
+        //ADD
+        instructionLine.setBitsInt(6);
+        dec.calc();
+        if ( false != LDRLine.getPin(0) ) return false;
+        if ( false != STRLine.getPin(0) ) return false;
+        if ( false != MR1R2Line.getPin(0) ) return false;
+        if ( false != JPZLine.getPin(0) ) return false;
+        if ( false != ANDLine.getPin(0) ) return false;
+        if ( false != ORLine.getPin(0) ) return false;
+        if ( true != ADDLine.getPin(0) ) return false;
+        if ( false != SUBLine.getPin(0) ) return false;
+        //SUB
+        instructionLine.setBitsInt(7);
+        dec.calc();
+        if ( false != LDRLine.getPin(0) ) return false;
+        if ( false != STRLine.getPin(0) ) return false;
+        if ( false != MR1R2Line.getPin(0) ) return false;
+        if ( false != JPZLine.getPin(0) ) return false;
+        if ( false != ANDLine.getPin(0) ) return false;
+        if ( false != ORLine.getPin(0) ) return false;
+        if ( false != ADDLine.getPin(0) ) return false;
+        if ( true != SUBLine.getPin(0) ) return false;
+        
+        return true;
+    }
 }

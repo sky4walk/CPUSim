@@ -43,6 +43,7 @@ public class CPUSim {
         if ( !tester.testAdressInstructionRAM()) System.out.println("NOK AdressInstructionRAM");
         if ( !tester.testDataPath()) System.out.println("NOK DataPath");
         if ( !tester.testCycleCounter()) System.out.println("NOK CycleCounter");
+        if ( !tester.testInstructionDecoder()) System.out.println("NOK InstructionDecoder");
         System.out.println("test end");
     }
     /**

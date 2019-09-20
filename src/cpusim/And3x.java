@@ -20,6 +20,9 @@ public class And3x {
         and2.setInput(and1.getOutput(), c);
         and2.calc();
     }
+    public void calc() {
+        
+    }
     public boolean getOutput() {
         return and2.getOutput();
     }
