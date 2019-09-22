@@ -988,4 +988,50 @@ public class testgates {
 
         return true;
     }
+    public boolean testAnd2x() {
+        DataLine1Bit x1 = new DataLine1Bit();
+        DataLine1Bit x2 = new DataLine1Bit();
+        DataLine1Bit out = new DataLine1Bit();
+        And2x andTest = new And2x(x1, x2, out);
+
+        x1.setPin(0, false);
+        x2.setPin(0, false);
+        andTest.calc();
+        if ( false != out.getPin(0)) return false;
+        
+        x1.setPin(0, true);
+        x2.setPin(0, false);
+        andTest.calc();
+        if ( false != out.getPin(0)) return false;
+        
+        x1.setPin(0, false);
+        x2.setPin(0, true);
+        andTest.calc();
+        if ( false != out.getPin(0)) return false;
+
+        x1.setPin(0, true);
+        x2.setPin(0, true);
+        andTest.calc();
+        if ( true != out.getPin(0)) return false;
+
+        return true;
+    }
+    public boolean testNot1x() {
+        DataLine1Bit x1 = new DataLine1Bit();
+        DataLine1Bit out = new DataLine1Bit();
+        Not1x not1 = new Not1x(x1, out);
+        
+        x1.setPin(0, false);
+        not1.calc();
+        if ( true != out.getPin(0)) return false;
+
+        x1.setPin(0, true);
+        not1.calc();
+        if ( false != out.getPin(0)) return false;        
+        
+        return true;
+    }
+    public boolean testCommandSet() {
+        return true;
+    }
 }
