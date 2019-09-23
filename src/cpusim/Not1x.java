@@ -6,7 +6,7 @@ package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@andrebetz.de
  */
 public class Not1x {
     private not not1 = new not();

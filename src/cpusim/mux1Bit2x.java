@@ -7,7 +7,7 @@ package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@andrebetz.de
  */
 public class mux1Bit2x {
     private not not1 = new not();

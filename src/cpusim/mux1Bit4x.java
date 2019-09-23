@@ -6,7 +6,7 @@ package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@andrebetz.de
  */
 public class mux1Bit4x {
     private mux1Bit2x mux1;

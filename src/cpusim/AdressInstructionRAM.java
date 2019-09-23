@@ -6,7 +6,7 @@ package cpusim;
 
 /**
  *
- * @author betzan8u
+ * @author github@andrebetz.de
  */
 public class AdressInstructionRAM {
     private ProgramCounter8Bit cnt;

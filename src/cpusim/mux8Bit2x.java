@@ -1,13 +1,13 @@
 /*
-https://itzwieseltal.wordpress.com/2018/01/23/do-it-yourself-cpu-4-prozessor/
-github@AndreBetz.de
-*/
+ * https://itzwieseltal.wordpress.com/2018/01/23/do-it-yourself-cpu-4-prozessor/
+ * github@AndreBetz.de
+ */
 
 package cpusim;
 
 /**
  *
- * @author betzan8u
+ * @author github@andrebetz.de
  */
 public class mux8Bit2x {
     private DataLine8Bit in1;

@@ -6,7 +6,7 @@ package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@andrebetz.de
  */
 public class mux8Bit16x {
     private DataLine8Bit In[];

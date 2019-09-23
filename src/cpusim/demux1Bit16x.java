@@ -6,7 +6,7 @@ package cpusim;
 
 /**
  *
- * @author betzan8u
+ * @author github@andrebetz.de
  */
 public class demux1Bit16x {
     private demux1Bit4x dm1;

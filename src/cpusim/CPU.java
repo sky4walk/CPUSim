@@ -8,8 +8,7 @@ package cpusim;
  *
  * @author github@andrebetz.de
  */
-interface logicGate {
-    public void setInput(boolean a, boolean b);
-    public void calc();
-    public boolean getOutput();
+public class CPU {
+    private CPUController cc;
+    
 }

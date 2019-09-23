@@ -1,13 +1,13 @@
 /*
-https://itzwieseltal.wordpress.com/2018/01/23/do-it-yourself-cpu-4-prozessor/
-github@AndreBetz.de
-*/
+ * https://itzwieseltal.wordpress.com/2018/01/23/do-it-yourself-cpu-4-prozessor/
+ * github@AndreBetz.de
+ */
 
 package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@andrebetz.de
  */
 public class DataLine1Bit {
     private boolean pins[] = new boolean[1];

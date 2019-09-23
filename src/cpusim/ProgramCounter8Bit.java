@@ -7,7 +7,7 @@ package cpusim;
 
 /**
  *
- * @author betzan8u
+ * @author github@andrebetz.de
  */
 public class ProgramCounter8Bit {
     private DataLine8Bit PCin;

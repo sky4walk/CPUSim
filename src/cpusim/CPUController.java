@@ -49,11 +49,10 @@ public class CPUController {
                 ImmediateLoad, RegisterWrite, dRegSel, sRegSel, 
                 regSel, opSel, addressSel);        
     }
-    public void clkcycle() {
+    public void clkCycle() {
         id.calc();
-        cc.clkCycle();
         cs.calc();
-        
+        cc.clkCycle();        
     }
     public DataLine8Bit getDebugCycleCnt() {
         return cc.getDebugCounter();

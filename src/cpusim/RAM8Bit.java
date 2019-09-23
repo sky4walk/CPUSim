@@ -6,7 +6,7 @@ package cpusim;
 
 /**
  *
- * @author betzan8u
+ * @author github@andrebetz.de
  */
 public class RAM8Bit {
     private mux8Bit256x mux;

@@ -7,7 +7,7 @@ package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@andrebetz.de
  */
 public class halfAdd {
     private xor xor1 = new xor();

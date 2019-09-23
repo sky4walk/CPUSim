@@ -7,7 +7,7 @@ package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@andrebetz.de
  */
 public class or implements logicGate{
     private nand nand1 = new nand();
