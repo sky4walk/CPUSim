@@ -35,6 +35,15 @@ public class CommandSet {
     private DataLine1Bit zero = new DataLine1Bit();
     private DataLine1Bit one = new DataLine1Bit();
     private DataLine2Bit muxLine = new DataLine2Bit();
+    private DataLine1Bit or6mux2_5 = new DataLine1Bit();
+    private DataLine1Bit or1mux3 = new DataLine1Bit();
+    private DataLine1Bit and1or1 = new DataLine1Bit();
+    private DataLine1Bit or81mux6 = new DataLine1Bit();
+    private DataLine1Bit or7or2mux8_10 = new DataLine1Bit();
+    private DataLine1Bit or2mux7 = new DataLine1Bit();
+    private DataLine1Bit or3mux13 = new DataLine1Bit();
+    private DataLine1Bit or4mux11 = new DataLine1Bit();
+    private DataLine1Bit or5mux12 = new DataLine1Bit();
     public CommandSet(
             DataLine8Bit cklCounter,
             DataLine1Bit LDR,
@@ -45,6 +54,7 @@ public class CommandSet {
             DataLine1Bit OR,
             DataLine1Bit ADD,
             DataLine1Bit SUB,
+            DataLine1Bit zFlag,
             DataLine1Bit PCSelect,
             DataLine1Bit PCLoad,
             DataLine1Bit Write,
@@ -63,10 +73,43 @@ public class CommandSet {
         //mux dataline in
         muxLine.setDataLine(0, cklCounter.getDataLine(0));
         muxLine.setDataLine(1, cklCounter.getDataLine(1));
-        
-        
+        // connect logic gates
+        and1 = new And2x(zFlag, JPZ, and1or1);
+        or1 = new Or2x(STR, and1or1 , or1mux3);
+        or7 = new Or4x(AND, OR, ADD, SUB, or7or2mux8_10);
+        or2 = new Or2x(MR1R2, or7or2mux8_10, or2mux7);
+        or3 = new Or2x(LDR, STR, or3mux13);
+        or4 = new Or2x(OR, SUB, or4mux11);
+        or5 = new Or2x(ADD, SUB, or5mux12);
+        or6 = new Or3x(LDR, STR, JPZ, or6mux2_5);
+        or8 = new Or5x(MR1R2, AND, OR, ADD, SUB, or81mux6);
+        mux1 = new mux1Bit4x(zero, zero, JPZ, zero, PCSelect, muxLine);
+        mux2 = new mux1Bit4x(one , or6mux2_5, zero, zero, PCLoad, muxLine);
+        mux3 = new mux1Bit4x(zero , zero, or1mux3, zero, Write, muxLine);
     }
     public void calc() {
-        
+        and1.calc();
+        or3.calc();
+        or4.calc();
+        or5.calc();
+        or6.calc();
+        or7.calc();
+        or8.calc();
+        // order is impoprtant
+        or1.calc();
+        or2.calc();
+        mux1.calc();
+        mux2.calc();
+        mux3.calc();
+        mux4.calc();
+        mux5.calc();
+        mux6.calc();
+        mux7.calc();
+        mux8.calc();
+        mux9.calc();
+        mux10.calc();
+        mux11.calc();
+        mux12.calc();
+        mux13.calc();                
     }
 }
