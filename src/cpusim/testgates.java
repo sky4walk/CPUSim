@@ -699,40 +699,46 @@ public class testgates {
         return true;
     }
     public boolean testCycleCounter() {
+        DataLine8Bit counterLine = new DataLine8Bit();
         DataLine1Bit resetLine = new DataLine1Bit();
         DataLine1Bit cycle1Line = new DataLine1Bit();
         DataLine1Bit cycle2Line = new DataLine1Bit();
         DataLine1Bit cycle3Line = new DataLine1Bit();
         CycleCounter ccl = new CycleCounter(
-                resetLine,cycle1Line, cycle2Line, cycle3Line);
+                counterLine,resetLine,cycle1Line, cycle2Line, cycle3Line);
         
         if ( true  != cycle1Line.getPin(0) ) return false;
         if ( false != cycle2Line.getPin(0) ) return false;
         if ( false != cycle3Line.getPin(0) ) return false;
+        if ( 0 != counterLine.getBitsInt() ) return false;
 
         ccl.clkCycle();
         
         if ( false != cycle1Line.getPin(0) ) return false;
         if ( true  != cycle2Line.getPin(0) ) return false;
         if ( false != cycle3Line.getPin(0) ) return false;
+        if ( 1 != counterLine.getBitsInt() ) return false;
 
         ccl.clkCycle();
 
         if ( false != cycle1Line.getPin(0) ) return false;
         if ( false != cycle2Line.getPin(0) ) return false;
         if ( true  != cycle3Line.getPin(0) ) return false;
-        
+        if ( 2 != counterLine.getBitsInt() ) return false;
+
         ccl.clkCycle();
 
         if ( true  != cycle1Line.getPin(0) ) return false;
         if ( false != cycle2Line.getPin(0) ) return false;
         if ( false != cycle3Line.getPin(0) ) return false;
+        if ( 0 != counterLine.getBitsInt() ) return false;
 
         ccl.clkCycle();
 
         if ( false != cycle1Line.getPin(0) ) return false;
         if ( true  != cycle2Line.getPin(0) ) return false;
         if ( false != cycle3Line.getPin(0) ) return false;
+        if ( 1 != counterLine.getBitsInt() ) return false;
 
         resetLine.setPin(0, true);
         ccl.clkCycle();
@@ -740,6 +746,7 @@ public class testgates {
         if ( true  != cycle1Line.getPin(0) ) return false;
         if ( false != cycle2Line.getPin(0) ) return false;
         if ( false != cycle3Line.getPin(0) ) return false;
+        if ( 0 != counterLine.getBitsInt() ) return false;
 
         resetLine.setPin(0, false);
         ccl.clkCycle();
@@ -747,6 +754,7 @@ public class testgates {
         if ( false != cycle1Line.getPin(0) ) return false;
         if ( true  != cycle2Line.getPin(0) ) return false;
         if ( false != cycle3Line.getPin(0) ) return false;
+        if ( 1 != counterLine.getBitsInt() ) return false;
         
         return true;
     }
@@ -1348,6 +1356,26 @@ public class testgates {
         return true;
     }
     public boolean testCPUController() {
+        DataLine8Bit Instruction = new DataLine8Bit();
+        DataLine1Bit zFlag = new DataLine1Bit();
+        DataLine1Bit PCSelect  = new DataLine1Bit();
+        DataLine1Bit PCLoad  = new DataLine1Bit();
+        DataLine1Bit Write  = new DataLine1Bit();
+        DataLine1Bit InstructionLoad  = new DataLine1Bit();
+        DataLine1Bit ImmediateLoad  = new DataLine1Bit();
+        DataLine1Bit RegisterWrite  = new DataLine1Bit();
+        DataLine1Bit dRegSel  = new DataLine1Bit();
+        DataLine1Bit sRegSel  = new DataLine1Bit();
+        DataLine2Bit regSel  = new DataLine2Bit();
+        DataLine2Bit opSel  = new DataLine2Bit();
+        DataLine2Bit addressSel  = new DataLine2Bit();
+        CPUController cc = new CPUController(
+                Instruction, zFlag, PCSelect, PCLoad, Write, InstructionLoad, 
+                ImmediateLoad, RegisterWrite, regSel, dRegSel, sRegSel, opSel, 
+                addressSel);
+        //LDA
+        Instruction.setBitsInt(0);
+        
         return true;
     }
 

@@ -21,8 +21,8 @@ public class CycleCounter {
     private and andCyc3 = new and();
     private or or1 = new or();
     private DataLine8Bit one = new DataLine8Bit();
+    private DataLine8Bit counter = new DataLine8Bit();
     private DataLine8Bit zero = new DataLine8Bit();
-    private DataLine8Bit regAlu = new DataLine8Bit();
     private DataLine8Bit aluMux = new DataLine8Bit();
     private DataLine8Bit muxReg = new DataLine8Bit();
     private DataLine1Bit andMux = new DataLine1Bit();
@@ -33,10 +33,12 @@ public class CycleCounter {
     private DataLine1Bit cycle2;
     private DataLine1Bit cycle3;
     public CycleCounter(
+            DataLine8Bit counterLine,
             DataLine1Bit resetLine,
             DataLine1Bit cycle1Line,
             DataLine1Bit cycle2Line,
             DataLine1Bit cycle3Line ) {
+        counter = counterLine;
         reset = resetLine;
         cycle1 = cycle1Line;
         cycle2 = cycle2Line;
@@ -44,27 +46,27 @@ public class CycleCounter {
         one.setBitsInt(1);
         zero.setBitsInt(0);
         write.setPin(0, true);
-        add = new Add8Bit(regAlu, one, aluMux, new DataLine1Bit(), new DataLine1Bit());
+        add = new Add8Bit(counter, one, aluMux, new DataLine1Bit(), new DataLine1Bit());
         mux = new mux8Bit2x(aluMux, zero, muxReg, orMux);
-        reg = new Register8Bit(muxReg, regAlu, write);
+        reg = new Register8Bit(muxReg, counter, write);
         calc();
     }
     private void calc() {
-        notCyc1a.setInput(regAlu.getPin(0), regAlu.getPin(0));
+        notCyc1a.setInput(counter.getPin(0), counter.getPin(0));
         notCyc1a.calc();
-        notCyc1b.setInput(regAlu.getPin(1), regAlu.getPin(1));
+        notCyc1b.setInput(counter.getPin(1), counter.getPin(1));
         notCyc1b.calc();
         
-        notCyc2.setInput(regAlu.getPin(1), regAlu.getPin(1));
+        notCyc2.setInput(counter.getPin(1), counter.getPin(1));
         notCyc2.calc();
-        notCyc3.setInput(regAlu.getPin(0), regAlu.getPin(0));
+        notCyc3.setInput(counter.getPin(0), counter.getPin(0));
         notCyc3.calc();
         
         andCyc1.setInput(notCyc1a.getOutput(), notCyc1b.getOutput());
         andCyc1.calc();
-        andCyc2.setInput(regAlu.getPin(0), notCyc2.getOutput());
+        andCyc2.setInput(counter.getPin(0), notCyc2.getOutput());
         andCyc2.calc();
-        andCyc3.setInput(regAlu.getPin(1), notCyc3.getOutput());
+        andCyc3.setInput(counter.getPin(1), notCyc3.getOutput());
         andCyc3.calc();
         
         cycle1.setPin(0, andCyc1.getOutput());
@@ -84,6 +86,6 @@ public class CycleCounter {
         calc();
     }
     public DataLine8Bit getDebugCounter() {
-        return regAlu;
+        return counter;
     }
 }
