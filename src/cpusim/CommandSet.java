@@ -95,7 +95,7 @@ public class CommandSet {
         mux10 = new mux1Bit4x(zero, or7or2mux8_10, zero, zero, sRegSel, muxLine);
         mux11 = new mux1Bit4x(zero, or4mux11, zero, zero, opSel.getDataLine(0), muxLine);
         mux12 = new mux1Bit4x(zero, or5mux12, zero, zero, opSel.getDataLine(1), muxLine);
-        mux13 = new mux1Bit4x(zero, or3mux13, zero, zero, addressSel.getDataLine(0), muxLine);
+        mux13 = new mux1Bit4x(zero, zero, or3mux13, zero, addressSel.getDataLine(0), muxLine);
     }
     public void calc() {
         and1.calc();

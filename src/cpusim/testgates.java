@@ -1032,6 +1032,60 @@ public class testgates {
         return true;
     }
     public boolean testCommandSet() {
+        DataLine8Bit cklCounter = new DataLine8Bit();
+        DataLine1Bit LDR = new DataLine1Bit();
+        DataLine1Bit STR = new DataLine1Bit();
+        DataLine1Bit MR1R2 = new DataLine1Bit();
+        DataLine1Bit JPZ = new DataLine1Bit();
+        DataLine1Bit AND = new DataLine1Bit();
+        DataLine1Bit OR = new DataLine1Bit();
+        DataLine1Bit ADD = new DataLine1Bit();
+        DataLine1Bit SUB  = new DataLine1Bit();
+        DataLine1Bit zFlag  = new DataLine1Bit();
+        DataLine1Bit PCSelect  = new DataLine1Bit();
+        DataLine1Bit PCLoad  = new DataLine1Bit();
+        DataLine1Bit Write  = new DataLine1Bit();
+        DataLine1Bit InstructionLoad  = new DataLine1Bit();
+        DataLine1Bit ImmediateLoad  = new DataLine1Bit();
+        DataLine1Bit RegisterWrite  = new DataLine1Bit();
+        DataLine1Bit dRegSel  = new DataLine1Bit();
+        DataLine1Bit sRegSel  = new DataLine1Bit();
+        DataLine2Bit regSel  = new DataLine2Bit();
+        DataLine2Bit opSel  = new DataLine2Bit();
+        DataLine2Bit addressSel  = new DataLine2Bit();
+        CommandSet cs = new CommandSet(
+                cklCounter, LDR, STR, MR1R2, JPZ, AND, OR, ADD, SUB, zFlag, 
+                PCSelect, PCLoad, Write, InstructionLoad, ImmediateLoad, 
+                RegisterWrite, dRegSel, sRegSel, regSel, opSel, addressSel);
+        
+        LDR.setPin(0, true);
+        cklCounter.setBitsInt(0);
+        cs.calc();
+        if ( false != PCSelect.getPin(0)) return false;
+        if ( false != addressSel.getPin(0)) return false;
+        if ( true != PCLoad.getPin(0)) return false;
+        if ( false != Write.getPin(0)) return false;
+        if ( true != InstructionLoad.getPin(0)) return false;
+        if ( false != ImmediateLoad.getPin(0)) return false;
+        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( 0 != regSel.getBitsInt()) return false;
+        if ( false != dRegSel.getPin(0)) return false;
+        if ( false != sRegSel.getPin(0)) return false;
+        if ( 0 != opSel.getBitsInt()) return false;
+        cklCounter.setBitsInt(1);
+        cs.calc();
+        if ( false != PCSelect.getPin(0)) return false;
+        if ( false != addressSel.getPin(0)) return false;
+        if ( true != PCLoad.getPin(0)) return false;
+        if ( false != Write.getPin(0)) return false;
+        if ( false != InstructionLoad.getPin(0)) return false;
+        if ( true != ImmediateLoad.getPin(0)) return false;
+        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( 0 != regSel.getBitsInt()) return false;
+        if ( false != dRegSel.getPin(0)) return false;
+        if ( false != sRegSel.getPin(0)) return false;
+        if ( 0 != opSel.getBitsInt()) return false;
+        
         return true;
     }
 }
