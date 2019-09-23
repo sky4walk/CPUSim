@@ -86,6 +86,16 @@ public class CommandSet {
         mux1 = new mux1Bit4x(zero, zero, JPZ, zero, PCSelect, muxLine);
         mux2 = new mux1Bit4x(one , or6mux2_5, zero, zero, PCLoad, muxLine);
         mux3 = new mux1Bit4x(zero , zero, or1mux3, zero, Write, muxLine);
+        mux4 = new mux1Bit4x(one, zero, zero, zero, InstructionLoad, muxLine);
+        mux5 = new mux1Bit4x(zero, or6mux2_5, zero, zero, ImmediateLoad, muxLine);
+        mux6 = new mux1Bit4x(zero, or81mux6, LDR, zero, RegisterWrite, muxLine);
+        mux7 = new mux1Bit4x(zero, or2mux7, zero, zero, regSel.getDataLine(0), muxLine);
+        mux8 = new mux1Bit4x(zero, or7or2mux8_10,LDR, zero, regSel.getDataLine(1), muxLine);
+        mux9 = new mux1Bit4x(zero, MR1R2, zero, zero, dRegSel, muxLine);
+        mux10 = new mux1Bit4x(zero, or7or2mux8_10, zero, zero, sRegSel, muxLine);
+        mux11 = new mux1Bit4x(zero, or4mux11, zero, zero, opSel.getDataLine(0), muxLine);
+        mux12 = new mux1Bit4x(zero, or5mux12, zero, zero, opSel.getDataLine(1), muxLine);
+        mux13 = new mux1Bit4x(zero, or3mux13, zero, zero, addressSel.getDataLine(0), muxLine);
     }
     public void calc() {
         and1.calc();

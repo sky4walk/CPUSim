@@ -48,6 +48,7 @@ public class CPUSim {
         if ( !tester.testOr5x()) System.out.println("NOK Or5x");
         if ( !tester.testAnd2x()) System.out.println("NOK And2x");
         if ( !tester.testNot1x()) System.out.println("NOK Not1x");
+        if ( !tester.testCommandSet()) System.out.println("NOK CommandSet");
         System.out.println("test end");
     }
     /**
