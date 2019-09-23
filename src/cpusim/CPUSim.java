@@ -7,7 +7,7 @@ package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@AndreBetz.de
  */
 public class CPUSim {
 
@@ -49,6 +49,7 @@ public class CPUSim {
         if ( !tester.testAnd2x()) System.out.println("NOK And2x");
         if ( !tester.testNot1x()) System.out.println("NOK Not1x");
         if ( !tester.testCommandSet()) System.out.println("NOK CommandSet");
+        if ( !tester.testCPUController()) System.out.println("NOK CPUController");
         System.out.println("test end");
     }
     /**

@@ -7,7 +7,7 @@ package cpusim;
 
 /**
  *
- * @author andre
+ * @author github@AndreBetz.de
  */
 public class testgates {
     public boolean testNand() {
@@ -1347,4 +1347,8 @@ public class testgates {
         zFlag.reset();
         return true;
     }
+    public boolean testCPUController() {
+        return true;
+    }
+
 }
