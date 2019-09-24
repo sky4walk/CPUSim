@@ -3,57 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/And2x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/mux8Bit2x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DFlipFlop.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/mux1Bit2x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/And8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Or8x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Or2x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DataLine8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/not.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Or5x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/And3x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Or8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/xor.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CommandSet.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/AdressInstructionRAM.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/or.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/demux1Bit2x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CPU.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/testgates.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/and.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DSBusRegister.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/mux1Bit4x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DSBusRegALU.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DataLine1Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/mux8Bit4x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CycleCounter.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/ALU8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/ProgramCounter8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CPUSim.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Add1Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Or3x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/demux1Bit4x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/logicGate.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/InstructionDecoder.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Not1x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DataPath.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Or4x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/RAM8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Not1Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/nand.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/demux1Bit16x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/demux1Bit256x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Not8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/halfAdd.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CPUController.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DataLine4Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Add8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DataLine2Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/mux8Bit16x.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Register8Bit.java</file>
-            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/mux8Bit256x.java</file>
+            <file>file:/C:/Users/betzan8u/Downloads/CPUSim/src/cpusim/AdressInstructionRAM.java</file>
+            <file>file:/C:/Users/betzan8u/Downloads/CPUSim/src/cpusim/CPU.java</file>
+            <file>file:/C:/Users/betzan8u/Downloads/CPUSim/src/cpusim/DSBusRegister.java</file>
+            <file>file:/C:/Users/betzan8u/Downloads/CPUSim/src/cpusim/DataPath.java</file>
+            <file>file:/C:/Users/betzan8u/Downloads/CPUSim/src/cpusim/DSBusRegALU.java</file>
+            <file>file:/C:/Users/betzan8u/Downloads/CPUSim/src/cpusim/CPUController.java</file>
+            <file>file:/C:/Users/betzan8u/Downloads/CPUSim/src/cpusim/testgates.java</file>
         </group>
     </open-files>
 </project-private>

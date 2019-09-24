@@ -11,26 +11,24 @@ package cpusim;
 public class AdressInstructionRAM {
     private ProgramCounter8Bit cnt;
     private RAM8Bit ram;
-    private mux8Bit4x mux;
+    private mux8Bit2x mux;
     private Register8Bit instReg;
     private Register8Bit immeReg;
     private DataLine8Bit cnt2mux = new DataLine8Bit();
     private DataLine8Bit adressBus = new DataLine8Bit();
     public AdressInstructionRAM(
-            DataLine8Bit sBus,
-            DataLine8Bit dBus,
             DataLine8Bit DataInBus,
             DataLine8Bit DataOutBus,
             DataLine8Bit Instruction,
             DataLine8Bit Immediate,
-            DataLine2Bit AdressSelect,
+            DataLine1Bit AdressSelect,
             DataLine1Bit PCSelect,
             DataLine1Bit PCLoad,
             DataLine1Bit rw,
             DataLine1Bit instructionLoad,
             DataLine1Bit immediateLoad )  {
         cnt = new ProgramCounter8Bit(Immediate, cnt2mux, PCSelect, PCLoad);
-        mux = new mux8Bit4x(cnt2mux, Immediate, sBus, dBus, adressBus, AdressSelect);
+        mux = new mux8Bit2x(cnt2mux, Immediate, adressBus, AdressSelect);
         ram = new RAM8Bit(DataInBus, DataOutBus, adressBus, rw);
         instReg = new Register8Bit(DataOutBus, Instruction, instructionLoad);
         immeReg = new Register8Bit(DataOutBus, Immediate, immediateLoad);

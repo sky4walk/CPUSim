@@ -32,12 +32,12 @@ public class CPUController {
             DataLine1Bit Write,
             DataLine1Bit InstructionLoad,
             DataLine1Bit ImmediateLoad,
-            DataLine1Bit RegisterWrite,
-            DataLine2Bit regSel,
+            DataLine1Bit RegisterWrite,            
             DataLine1Bit dRegSel,
             DataLine1Bit sRegSel,
-            DataLine2Bit opSel,
-            DataLine2Bit addressSel ) {
+            DataLine1Bit addressSel,
+            DataLine2Bit regSel,
+            DataLine2Bit opSel ) {
         cc = new CycleCounter( 
                 counter, new DataLine1Bit(), new DataLine1Bit(), 
                 new DataLine1Bit(), new DataLine1Bit());
@@ -47,7 +47,7 @@ public class CPUController {
                 counter, LDA, STR, MR1R2, JPZ, AND, OR, ADD, SUB, 
                 zFlag, PCSelect, PCLoad, Write, InstructionLoad, 
                 ImmediateLoad, RegisterWrite, dRegSel, sRegSel, 
-                regSel, opSel, addressSel);        
+                addressSel, regSel, opSel);
     }
     public void clkCycle() {
         id.calc();

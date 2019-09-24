@@ -16,7 +16,7 @@ public class DSBusRegALU {
     public DSBusRegALU(
             DataLine8Bit Immediat,
             DataLine8Bit DataIn,
-            DataLine8Bit DataBus,
+            DataLine8Bit DataInReg,
             DataLine8Bit sBusOut,
             DataLine8Bit dBusOut,
             DataLine2Bit RegSel,
@@ -27,9 +27,9 @@ public class DSBusRegALU {
             DataLine1Bit flagZero,
             DataLine1Bit flagNeg ) {
         mux = new mux8Bit4x(
-                Immediat, sBusOut, DataIn, aluMux, DataBus, RegSel);
+                Immediat, sBusOut, DataIn, aluMux, DataInReg, RegSel);
         dsBus = new DSBusRegister(
-                DataBus, 
+                DataInReg, 
                 sBusOut, 
                 dBusOut, 
                 RegWrite, 

@@ -38,9 +38,6 @@ public class CPUSim {
         if ( !tester.testMux1Bit16x()) System.out.println("NOK Mux1Bit16x");
         if ( !tester.testMux1Bit256x()) System.out.println("NOK Mux1Bit256x");
         if ( !tester.testRAM8Bit()) System.out.println("NOK RAM8Bit");
-        if ( !tester.testDSBusRegALU()) System.out.println("NOK DSBusRegALU");
-        if ( !tester.testAdressInstructionRAM()) System.out.println("NOK AdressInstructionRAM");
-        if ( !tester.testDataPath()) System.out.println("NOK DataPath");
         if ( !tester.testCycleCounter()) System.out.println("NOK CycleCounter");
         if ( !tester.testInstructionDecoder()) System.out.println("NOK InstructionDecoder");
         if ( !tester.testMux1Bit4x()) System.out.println("NOK Mux1Bit4x");
@@ -49,6 +46,10 @@ public class CPUSim {
         if ( !tester.testNot1x()) System.out.println("NOK Not1x");
         if ( !tester.testCommandSet()) System.out.println("NOK CommandSet");
         if ( !tester.testCPUController()) System.out.println("NOK CPUController");
+        if ( !tester.testDSBusRegALU()) System.out.println("NOK DSBusRegALU");
+        if ( !tester.testAdressInstructionRAM()) System.out.println("NOK AdressInstructionRAM");
+        if ( !tester.testDataPath()) System.out.println("NOK DataPath");
+        if ( !tester.testCPU()) System.out.println("NOK CPU");
         System.out.println("test end");
     }
     /**

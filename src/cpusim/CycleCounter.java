@@ -43,8 +43,8 @@ public class CycleCounter {
         cycle1 = cycle1Line;
         cycle2 = cycle2Line;
         cycle3 = cycle3Line;
-        one.setBitsInt(1);
         zero.setBitsInt(0);
+        one.setBitsInt(1);
         write.setPin(0, true);
         add = new Add8Bit(counter, one, aluMux, new DataLine1Bit(), new DataLine1Bit());
         mux = new mux8Bit2x(aluMux, zero, muxReg, orMux);
