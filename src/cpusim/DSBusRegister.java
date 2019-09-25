@@ -70,4 +70,10 @@ public class DSBusRegister {
     public DataLine8Bit getDebugDBus() {
         return dBusOut;
     }
+    public DataLine8Bit getDebugRegister1() {
+        return reg1Mux;
+    }
+    public DataLine8Bit getDebugRegister2() {
+        return reg2Mux;
+    }
 }

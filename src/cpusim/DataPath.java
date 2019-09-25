@@ -67,10 +67,23 @@ public class DataPath {
     public DataLine8Bit getDebugSBus() {
         return sBus;
     }
-    public int getDebugReadRam(int Nr) {
+    public int getDebugRam(int Nr) {
         return adrRam.getDebugData(Nr);
     }
-    public void getDebugWriteRam(int Nr, int val) {
+    public void setDebugRam(int Nr, int val) {
         adrRam.setDebugData(Nr,val);
     }
+    public DataLine8Bit getDebugAluOut() {
+        return aluBus.getDebugAluOut();
+    }
+    public DataLine8Bit getDebugRegister1() {
+        return aluBus.getDebugRegister1();
+    }
+    public DataLine8Bit getDebugRegister2() {
+        return aluBus.getDebugRegister2();
+    }
+    public DataLine8Bit getDebugDataBusInOut() {
+        return DataBusInOut;
+    }
+    
 }

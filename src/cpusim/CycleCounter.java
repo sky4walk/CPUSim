@@ -20,6 +20,7 @@ public class CycleCounter {
     private and andCyc2 = new and();
     private and andCyc3 = new and();
     private or or1 = new or();
+    private Not1x not1;
     private DataLine8Bit one = new DataLine8Bit();
     private DataLine8Bit counter = new DataLine8Bit();
     private DataLine8Bit zero = new DataLine8Bit();
@@ -44,7 +45,8 @@ public class CycleCounter {
         cycle2 = cycle2Line;
         cycle3 = cycle3Line;
         zero.setBitsInt(0);
-        one.setBitsInt(1);
+        not1 = new Not1x(zero.getDataLine(0),one.getDataLine(0));
+	not1.calc();
         write.setPin(0, true);
         add = new Add8Bit(counter, one, aluMux, new DataLine1Bit(), new DataLine1Bit());
         mux = new mux8Bit2x(aluMux, zero, muxReg, orMux);

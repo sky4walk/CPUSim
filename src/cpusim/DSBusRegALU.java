@@ -47,4 +47,10 @@ public class DSBusRegALU {
     public DataLine8Bit getDebugAluOut() {
         return alu.getDebugAluOut();
     }
+    public DataLine8Bit getDebugRegister1() {
+        return dsBus.getDebugRegister1();
+    }
+    public DataLine8Bit getDebugRegister2() {
+        return dsBus.getDebugRegister2();
+    }
 }

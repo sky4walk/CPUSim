@@ -1724,6 +1724,23 @@ public class testgates {
                 InstructionLoad, ImmediateLoad, regWrite, dRegSel, sRegSel, 
                 opSel, regSel);
         
+        dp.setDebugRam(0, 13);
+        //LDR [Adr] load value from Adr into R1
+        //load instruction
+        PCSel.setPin(0, false);
+        AdrSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, true);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        
+        
         return true;
     }
     public boolean testCPU() {
