@@ -414,7 +414,7 @@ public class testgates {
         //enable store count state
         PCloadLine.setPin(0, true);
         //use counter
-        PCselectLine.setPin(0, true);
+        PCselectLine.setPin(0, false);
         cnt.clkCycle();
         cnt.clkCycle();
         cnt.clkCycle();
@@ -424,7 +424,7 @@ public class testgates {
         cnt.clkCycle();
         cnt.clkCycle();
         if ( 4 != PCoutLine.getBitsInt() ) return false;
-        PCselectLine.setPin(0, false);
+        PCselectLine.setPin(0, true);
         cnt.clkCycle();
         if ( 4 != PCoutLine.getBitsInt() ) return false;
         PCloadLine.setPin(0, true);
@@ -1693,7 +1693,7 @@ public class testgates {
         if (  0 != adRam.getDebugAdressBus().getBitsInt() ) return false;
 
         PCLoad.setPin(0, true);
-        PCSelect.setPin(0, true);
+        PCSelect.setPin(0, false);
         immediateLoad.setPin(0, false);
         AdressSelect.setPin(0, true);
         adRam.clkCycle();
@@ -1724,12 +1724,15 @@ public class testgates {
                 InstructionLoad, ImmediateLoad, regWrite, dRegSel, sRegSel, 
                 opSel, regSel);
         
-        dp.setDebugRam(0, 13);
+        dp.setDebugRam(0, 13);  // Instruction
+        dp.setDebugRam(1, 17);  // Adresse
+        dp.setDebugRam(17, 23); // Value
+        
         //LDR [Adr] load value from Adr into R1
         //load instruction
         PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
         AdrSel.setPin(0, false);
-        PCLoad.setPin(0, true);
         ramWrite.setPin(0, false);
         InstructionLoad.setPin(0, true);
         ImmediateLoad.setPin(0, false);
@@ -1738,9 +1741,47 @@ public class testgates {
         dRegSel.setPin(0, false);
         sRegSel.setPin(0, false);
         opSel.setBitsInt(0);
+        if ( 0 != dp.getDebugPC().getBitsInt() ) return false;
         dp.clkCycle();
+        if ( 0 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 13 != Instruction.getBitsInt() ) return false;
         
-        
+        //load Adress
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, true);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 1 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugDataBusInOut().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugImmediate().getBitsInt() ) return false;
+        if ( 13 != Instruction.getBitsInt() ) return false;
+
+        //write value to register 1
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, true);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, true);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 2 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugImmediate().getBitsInt() ) return false;
+        if ( 13 != Instruction.getBitsInt() ) return false;
+
         return true;
     }
     public boolean testCPU() {

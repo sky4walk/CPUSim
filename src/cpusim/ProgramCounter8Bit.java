@@ -33,7 +33,7 @@ public class ProgramCounter8Bit {
         addVal.setBitsInt(1);
         uVal.setPin(0, false);
         add = new Add8Bit(addVal, PCout, lineMuxAdd, uVal, new DataLine1Bit());
-        mux = new mux8Bit2x(PCin, lineMuxAdd, lineRegMux, PCselect);
+        mux = new mux8Bit2x( lineMuxAdd, PCin, lineRegMux, PCselect);
         reg = new Register8Bit(lineRegMux, PCout, PCload);
     }
     public void clkCycle() {
