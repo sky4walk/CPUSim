@@ -11,7 +11,6 @@ package cpusim;
 public class DataPath {
     private AdressInstructionRAM adrRam;
     private DSBusRegALU aluBus;
-    private DataLine8Bit AdressBus = new DataLine8Bit();
     private DataLine8Bit Immediate = new DataLine8Bit();
     private DataLine8Bit DataBusInOut = new DataLine8Bit();
     private DataLine8Bit DataInReg = new DataLine8Bit();
@@ -52,8 +51,9 @@ public class DataPath {
         adrRam.clkCycle();
         aluBus.clkCycle();
     }
+    // only for debugging
     public DataLine8Bit getDebugAdressBus() {
-        return AdressBus;
+        return adrRam.getDebugAdressBus();
     }
     public DataLine8Bit getDebugImmediate() {
         return Immediate;
@@ -85,5 +85,7 @@ public class DataPath {
     public DataLine8Bit getDebugDataBusInOut() {
         return DataBusInOut;
     }
-    
+    public DataLine8Bit getDebugPC() {
+        return adrRam.getDebugCnt2Mux();
+    }
 }
