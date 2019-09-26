@@ -44,7 +44,7 @@ public class DataPath {
                 zFlag, 
                 new DataLine1Bit());
         adrRam = new AdressInstructionRAM(
-                dBus, DataBusInOut, Instruction, Immediate, AdrSel, 
+                sBus, DataBusInOut, Instruction, Immediate, AdrSel, 
                 PCSel, PCLoad, ramWrite, InstructionLoad, ImmediateLoad);
     }
     public void clkCycle() {

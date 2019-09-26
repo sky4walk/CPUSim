@@ -76,4 +76,10 @@ public class DSBusRegister {
     public DataLine8Bit getDebugRegister2() {
         return reg2Mux;
     }
+    public void setDebugWriteReg1(int val) {
+        reg1.write(val);
+    }
+    public void setDebugWriteReg2(int val) {
+        reg2.write(val);
+    }
 }

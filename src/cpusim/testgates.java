@@ -1727,7 +1727,18 @@ public class testgates {
         dp.setDebugRam(0, 13);  // Instruction
         dp.setDebugRam(1, 17);  // Adresse
         dp.setDebugRam(17, 23); // Value
+
+        dp.setDebugRam(2, 14);  // Instruction
+        dp.setDebugRam(3, 31);  // Adresse
+        dp.setDebugRam(31, 0); // Value
         
+        dp.setDebugRam(4, 15);  // Instruction
+        dp.setDebugRam(5, 21);  // Instruction
+        dp.setDebugRam(6, 22);  // Instruction
+        dp.setDebugRam(7, 23);  // Instruction
+        dp.setDebugRam(8, 24);  // Instruction
+        dp.setDebugRam(9, 25);  // Instruction
+
         //LDR [Adr] load value from Adr into R1
         //load instruction
         PCSel.setPin(0, false);
@@ -1782,6 +1793,322 @@ public class testgates {
         if ( 17 != dp.getDebugImmediate().getBitsInt() ) return false;
         if ( 13 != Instruction.getBitsInt() ) return false;
 
+        //SDR [Adr] write value from R1 into Adr
+        //load instruction
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, true);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        if ( 2 != dp.getDebugPC().getBitsInt() ) return false;
+        dp.clkCycle();
+        if ( 2 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 14 != Instruction.getBitsInt() ) return false;
+        if ( 17 != dp.getDebugDBus().getBitsInt() ) return false;
+        //load Adress
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, true);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 3 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 31 != dp.getDebugDataBusInOut().getBitsInt() ) return false;
+        if ( 31 != dp.getDebugImmediate().getBitsInt() ) return false;
+        if ( 14 != Instruction.getBitsInt() ) return false;
+        if ( 17 != dp.getDebugDBus().getBitsInt() ) return false;
+        //write reg1 to ram adress
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, true);
+        ramWrite.setPin(0, true);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 31 != dp.getDebugAdressBus().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 4 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugDBus().getBitsInt() ) return false;
+        if ( 31 != dp.getDebugImmediate().getBitsInt() ) return false;
+        if ( 14 != Instruction.getBitsInt() ) return false;
+        if ( 17 !=  dp.getDebugDataBusInOut().getBitsInt() ) return false;
+        if ( 17 !=   dp.getDebugSBus().getBitsInt() ) return false;
+        if ( 17 !=  dp.getDebugRam(31) ) return false;
+        //MR1R2 copy R1 to R2
+        //load instruction
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, true);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        if ( 4 != dp.getDebugPC().getBitsInt() ) return false;
+        dp.clkCycle();
+        if ( 4 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 15 != Instruction.getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 0 != dp.getDebugRegister2().getBitsInt() ) return false;
+        //copy R1 to R2
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, true);
+        regSel.setBitsInt(1);
+        dRegSel.setPin(0, true);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 5 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        
+        //ADD R1 = R1 + R2
+        //load instruction
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, true);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 5 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 21 != Instruction.getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        //Add
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, true);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 5 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 34 != dp.getDebugAluOut().getBitsInt() ) return false;
+        //store alu out in R1
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, true);
+        regSel.setBitsInt(3);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 6 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 34 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( false != zFlag.getPin(0) ) return false;
+
+        //OR R1 = R1 or R2
+        //load instruction
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, true);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 6 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 22 != Instruction.getBitsInt() ) return false;
+        if ( 34 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        //or
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, true);
+        opSel.setBitsInt(3);
+        dp.clkCycle();
+        if ( 6 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 51 != dp.getDebugAluOut().getBitsInt() ) return false;
+        //store alu out in R1
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, true);
+        regSel.setBitsInt(3);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 7 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 51 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( false != zFlag.getPin(0) ) return false;
+
+        //SUB R1 = R1 - R2
+        //load instruction
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, true);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 7 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 23 != Instruction.getBitsInt() ) return false;
+        if ( 51 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        //sub
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, true);
+        opSel.setBitsInt(1);
+        dp.clkCycle();
+        if ( 7 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 34 != dp.getDebugAluOut().getBitsInt() ) return false;
+        //store alu out in R1
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, true);
+        regSel.setBitsInt(3);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 8 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 34 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( false != zFlag.getPin(0) ) return false;
+        
+        //AND R1 = R1 & R2
+        //load instruction
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, true);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 8 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 24 != Instruction.getBitsInt() ) return false;
+        if ( 34 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        //and
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, true);
+        opSel.setBitsInt(2);
+        dp.clkCycle();
+        if ( 8 != dp.getDebugPC().getBitsInt() ) return false;
+        int r = dp.getDebugAluOut().getBitsInt();
+        if ( 0 != dp.getDebugAluOut().getBitsInt() ) return false;
+        //store alu out in R1
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, true);
+        regSel.setBitsInt(3);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 9 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 0 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( true != zFlag.getPin(0) ) return false;
+        
+        //JPZ 
+        //load instruction
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, false);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, true);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 9 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 25 != Instruction.getBitsInt() ) return false;
+        if ( 0 != dp.getDebugRegister1().getBitsInt() ) return false;
         return true;
     }
     public boolean testCPU() {

@@ -53,4 +53,10 @@ public class DSBusRegALU {
     public DataLine8Bit getDebugRegister2() {
         return dsBus.getDebugRegister2();
     }
+    public void setDebugRegister1(int val) {
+        dsBus.setDebugWriteReg1(val);
+    }
+    public void setDebugRegister2(int val) {
+        dsBus.setDebugWriteReg2(val);
+    }
 }
