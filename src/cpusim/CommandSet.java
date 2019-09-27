@@ -83,21 +83,13 @@ public class CommandSet {
         muxLine.setDataLine(0, cklCounter.getDataLine(0));
         muxLine.setDataLine(1, cklCounter.getDataLine(1));
 
-        // PCLoadCyc2 = LDR | SDR | MR1R2 | JPZ
-        orPCLd2 = new Or4x(LDR, STR, MR1R2, JPZ, m22);
-        // PCLoadCyc3 = LDR | SDR | ADD | SUB | AND | zFlag
-        orPCLd3 = new Or8xLines(LDR, STR, ADD, SUB, AND, zFlag, zero, zero, m23);
-        // AdrSelCyc3 = LDR | SDR
+        orPCLd2  = new Or4x(LDR, STR, MR1R2, JPZ, m22);
+        orPCLd3  = new Or8xLines(LDR, STR, ADD, SUB, AND, OR, zFlag, zero, m23);
         orAdrSel = new Or2x(LDR, STR, m3);
-        // ImmLdCyc2  = LDR | SDR | JPZ
-        oreImm = new Or4x(LDR, STR, JPZ, zero, m6);
-        // RegSel3    = ADD | OR | SUB | AND (0,1) 
-        // dRegSel3   = ADD | OR | SUB | AND 
-        // sRegSel2   = ADD | OR | SUB | AND 
-        orReg = new Or4x(ADD, OR, SUB, AND, m10m11m12);
-        // OPSel
-        orOP1 = new Or2x(SUB, AND, m12);
-        orOP2 = new Or2x( OR, AND, m13);
+        oreImm   = new Or4x(LDR, STR, JPZ, zero, m6);
+        orReg    = new Or4x(ADD, OR,  SUB, AND, m10m11m12);
+        orOP1    = new Or2x(SUB, AND, m12);
+        orOP2    = new Or2x( OR, AND, m13);
         
         mux1  = new mux1Bit4x(zero, zero,      JPZ,           zero, PCSelect,                muxLine);
         mux2  = new mux1Bit4x(zero, m22,       m23,           zero, PCLoad,                  muxLine);
