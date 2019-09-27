@@ -1738,6 +1738,8 @@ public class testgates {
         dp.setDebugRam(7, 23);  // Instruction
         dp.setDebugRam(8, 24);  // Instruction
         dp.setDebugRam(9, 25);  // Instruction
+        dp.setDebugRam(10, 26);  // Instruction
+        dp.setDebugRam(26, 41);  // Instruction
 
         //LDR [Adr] load value from Adr into R1
         //load instruction
@@ -1755,8 +1757,7 @@ public class testgates {
         if ( 0 != dp.getDebugPC().getBitsInt() ) return false;
         dp.clkCycle();
         if ( 0 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 13 != Instruction.getBitsInt() ) return false;
-        
+        if ( 13 != Instruction.getBitsInt() ) return false;        
         //load Adress
         PCSel.setPin(0, false);
         PCLoad.setPin(0, true);
@@ -1774,7 +1775,6 @@ public class testgates {
         if ( 17 != dp.getDebugDataBusInOut().getBitsInt() ) return false;
         if ( 17 != dp.getDebugImmediate().getBitsInt() ) return false;
         if ( 13 != Instruction.getBitsInt() ) return false;
-
         //write value to register 1
         PCSel.setPin(0, false);
         PCLoad.setPin(0, true);
@@ -2072,7 +2072,6 @@ public class testgates {
         opSel.setBitsInt(2);
         dp.clkCycle();
         if ( 8 != dp.getDebugPC().getBitsInt() ) return false;
-        int r = dp.getDebugAluOut().getBitsInt();
         if ( 0 != dp.getDebugAluOut().getBitsInt() ) return false;
         //store alu out in R1
         PCSel.setPin(0, false);
@@ -2109,6 +2108,39 @@ public class testgates {
         if ( 9 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 25 != Instruction.getBitsInt() ) return false;
         if ( 0 != dp.getDebugRegister1().getBitsInt() ) return false;
+        //load adress
+        PCSel.setPin(0, false);
+        PCLoad.setPin(0, true);
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, true);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        if ( 10 != dp.getDebugPC().getBitsInt() ) return false;
+        if ( 25 != Instruction.getBitsInt() ) return false;
+        if ( 26 != dp.getDebugDataBusInOut().getBitsInt() ) return false;
+        if ( 26 != dp.getDebugImmediate().getBitsInt() ) return false;
+        //write value to program counter
+        PCSel.setPin(0, true);
+        //PC load only on high when zFlag is high
+        PCLoad.setPin(0, true); 
+        AdrSel.setPin(0, false);
+        ramWrite.setPin(0, false);
+        InstructionLoad.setPin(0, false);
+        ImmediateLoad.setPin(0, false);
+        regWrite.setPin(0, false);
+        regSel.setBitsInt(0);
+        dRegSel.setPin(0, false);
+        sRegSel.setPin(0, false);
+        opSel.setBitsInt(0);
+        dp.clkCycle();
+        int r = dp.getDebugPC().getBitsInt();
+        
         return true;
     }
     public boolean testCPU() {
