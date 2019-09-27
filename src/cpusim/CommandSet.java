@@ -100,16 +100,27 @@ public class CommandSet {
         or4 = new Or2x(SUB, AND, or4mux11);
         or5 = new Or2x( OR, AND, or5mux12);
 
+        // PCLoadCyc2 = LDR | SDR | MR1R2 | JPZ
+        // PCLoadCyc3 = LDR | SDR | ADD | SUB | AND | zFlag
+        // AdrSelCyc3 = LDR | SDR
+        // ImmLdCyc2  = LDR | SDR | JPZ
+        // RegSel3    = ADD | OR | SUB | AND (0,1) 
+        // dRegSel3   = ADD | OR | SUB | AND 
+        // sRegSel2   = ADD | OR | SUB | AND 
+        
         mux1  = new mux1Bit4x(zero, zero,          JPZ,      zero, PCSelect,                muxLine);
         mux2  = new mux1Bit4x(zero, or6mux2_5,     zero,     zero, PCLoad,                  muxLine);
         mux3  = new mux1Bit4x(zero, zero,          or3mux13, zero, addressSel,              muxLine);
-        mux4  = new mux1Bit4x(zero, zero,          or1mux3,  zero, Write,                   muxLine);
+        mux4  = new mux1Bit4x(zero, zero,          STR,      zero, Write,                   muxLine);
         mux5  = new mux1Bit4x(one,  zero,          zero,     zero, InstructionLoad,         muxLine);
         mux6  = new mux1Bit4x(zero, or6mux2_5,     zero,     zero, ImmediateLoad,           muxLine);
-        mux7  = new mux1Bit4x(zero, or81mux6,      LDR,      zero, RegisterWrite,           muxLine);
-        mux8  = new mux1Bit4x(zero, or2mux7,       zero,     zero, regSel.getDataLine(0),   muxLine);
-        mux9  = new mux1Bit4x(zero, or7or2mux8_10, LDR,      zero, regSel.getDataLine(1),   muxLine);
+        mux7  = new mux1Bit4x(zero, MR1R2,         LDR,      zero, RegisterWrite,           muxLine);
+        
+        mux8  = new mux1Bit4x(zero, MR1R2,         zero,     zero, regSel.getDataLine(0),   muxLine);
+        mux9  = new mux1Bit4x(zero, zero,          zero,     zero, regSel.getDataLine(1),   muxLine);
+        
         mux10 = new mux1Bit4x(zero, MR1R2,         zero,     zero, dRegSel,                 muxLine);
+        
         mux11 = new mux1Bit4x(zero, or7or2mux8_10, zero,     zero, sRegSel,                 muxLine);
         mux12 = new mux1Bit4x(zero, or4mux11,      zero,     zero, opSel.getDataLine(0),    muxLine);
         mux13 = new mux1Bit4x(zero, or5mux12,      zero,     zero, opSel.getDataLine(1),    muxLine);
