@@ -35,28 +35,24 @@ public class CommandSet {
     private mux1Bit4x mux11;
     private mux1Bit4x mux12;
     private mux1Bit4x mux13;
-    private Or2x or1;
-    private Or2x or2;
-    private Or2x or3;
-    private Or2x or4;
-    private Or2x or5;
-    private Or3x or6;
-    private Or4x or7;
-    private Or5x or8;
-    private And2x and1;
     private Not1x not1;
+    private Or4x orPCLd2;
+    private Or8xLines orPCLd3;
+    private Or2x orAdrSel;
+    private Or4x oreImm;
+    private Or4x orReg;
+    private Or2x orOP1;
+    private Or2x orOP2;
     private DataLine1Bit zero = new DataLine1Bit();
-    private DataLine1Bit one = new DataLine1Bit();
+    private DataLine1Bit one  = new DataLine1Bit();
+    private DataLine1Bit m12 = new DataLine1Bit();
+    private DataLine1Bit m13 = new DataLine1Bit();
+    private DataLine1Bit m22 = new DataLine1Bit();
+    private DataLine1Bit m23 = new DataLine1Bit();
+    private DataLine1Bit m3 = new DataLine1Bit();
+    private DataLine1Bit m6 = new DataLine1Bit();
+    private DataLine1Bit m10m11m12 = new DataLine1Bit();
     private DataLine2Bit muxLine = new DataLine2Bit();
-    private DataLine1Bit or6mux2_5 = new DataLine1Bit();
-    private DataLine1Bit or1mux3 = new DataLine1Bit();
-    private DataLine1Bit and1or1 = new DataLine1Bit();
-    private DataLine1Bit or81mux6 = new DataLine1Bit();
-    private DataLine1Bit or7or2mux8_10 = new DataLine1Bit();
-    private DataLine1Bit or2mux7 = new DataLine1Bit();
-    private DataLine1Bit or3mux13 = new DataLine1Bit();
-    private DataLine1Bit or4mux11 = new DataLine1Bit();
-    private DataLine1Bit or5mux12 = new DataLine1Bit();
     public CommandSet(
             DataLine8Bit cklCounter,
             DataLine1Bit LDR,
@@ -87,55 +83,44 @@ public class CommandSet {
         muxLine.setDataLine(0, cklCounter.getDataLine(0));
         muxLine.setDataLine(1, cklCounter.getDataLine(1));
 
-        //PCLoad
-        and1 = new And2x(zFlag, JPZ, and1or1);
-        or1 = new Or2x(STR, and1or1 , or1mux3);
-        or7 = new Or4x(AND, OR, ADD, SUB, or7or2mux8_10);
-        or2 = new Or2x(MR1R2, or7or2mux8_10, or2mux7);
-        or3 = new Or2x(LDR, STR, or3mux13);
-        or6 = new Or3x(LDR, STR, JPZ, or6mux2_5);
-        or8 = new Or5x(MR1R2, AND, OR, ADD, SUB, or81mux6);
-        
-        // OPSel
-        or4 = new Or2x(SUB, AND, or4mux11);
-        or5 = new Or2x( OR, AND, or5mux12);
-
         // PCLoadCyc2 = LDR | SDR | MR1R2 | JPZ
+        orPCLd2 = new Or4x(LDR, STR, MR1R2, JPZ, m22);
         // PCLoadCyc3 = LDR | SDR | ADD | SUB | AND | zFlag
+        orPCLd3 = new Or8xLines(LDR, STR, ADD, SUB, AND, zFlag, zero, zero, m23);
         // AdrSelCyc3 = LDR | SDR
+        orAdrSel = new Or2x(LDR, STR, m3);
         // ImmLdCyc2  = LDR | SDR | JPZ
+        oreImm = new Or4x(LDR, STR, JPZ, zero, m6);
         // RegSel3    = ADD | OR | SUB | AND (0,1) 
         // dRegSel3   = ADD | OR | SUB | AND 
         // sRegSel2   = ADD | OR | SUB | AND 
+        orReg = new Or4x(ADD, OR, SUB, AND, m10m11m12);
+        // OPSel
+        orOP1 = new Or2x(SUB, AND, m12);
+        orOP2 = new Or2x( OR, AND, m13);
         
-        mux1  = new mux1Bit4x(zero, zero,          JPZ,      zero, PCSelect,                muxLine);
-        mux2  = new mux1Bit4x(zero, or6mux2_5,     zero,     zero, PCLoad,                  muxLine);
-        mux3  = new mux1Bit4x(zero, zero,          or3mux13, zero, addressSel,              muxLine);
-        mux4  = new mux1Bit4x(zero, zero,          STR,      zero, Write,                   muxLine);
-        mux5  = new mux1Bit4x(one,  zero,          zero,     zero, InstructionLoad,         muxLine);
-        mux6  = new mux1Bit4x(zero, or6mux2_5,     zero,     zero, ImmediateLoad,           muxLine);
-        mux7  = new mux1Bit4x(zero, MR1R2,         LDR,      zero, RegisterWrite,           muxLine);
-        
-        mux8  = new mux1Bit4x(zero, MR1R2,         zero,     zero, regSel.getDataLine(0),   muxLine);
-        mux9  = new mux1Bit4x(zero, zero,          zero,     zero, regSel.getDataLine(1),   muxLine);
-        
-        mux10 = new mux1Bit4x(zero, MR1R2,         zero,     zero, dRegSel,                 muxLine);
-        
-        mux11 = new mux1Bit4x(zero, or7or2mux8_10, zero,     zero, sRegSel,                 muxLine);
-        mux12 = new mux1Bit4x(zero, or4mux11,      zero,     zero, opSel.getDataLine(0),    muxLine);
-        mux13 = new mux1Bit4x(zero, or5mux12,      zero,     zero, opSel.getDataLine(1),    muxLine);
+        mux1  = new mux1Bit4x(zero, zero,      JPZ,           zero, PCSelect,                muxLine);
+        mux2  = new mux1Bit4x(zero, m22,       m23,           zero, PCLoad,                  muxLine);
+        mux3  = new mux1Bit4x(zero, zero,      m3,            zero, addressSel,              muxLine);
+        mux4  = new mux1Bit4x(zero, zero,      STR,           zero, Write,                   muxLine);
+        mux5  = new mux1Bit4x(one,  zero,      zero,          zero, InstructionLoad,         muxLine);
+        mux6  = new mux1Bit4x(zero, m6,        zero,          zero, ImmediateLoad,           muxLine);
+        mux7  = new mux1Bit4x(zero, MR1R2,     LDR,           zero, RegisterWrite,           muxLine);        
+        mux8  = new mux1Bit4x(zero, MR1R2,     m10m11m12,     zero, regSel.getDataLine(0),   muxLine);
+        mux9  = new mux1Bit4x(zero, zero,      m10m11m12,     zero, regSel.getDataLine(1),   muxLine);        
+        mux10 = new mux1Bit4x(zero, MR1R2,     m10m11m12,     zero, dRegSel,                 muxLine);        
+        mux11 = new mux1Bit4x(zero, m10m11m12, zero,          zero, sRegSel,                 muxLine);
+        mux12 = new mux1Bit4x(zero, m12,       zero,          zero, opSel.getDataLine(0),    muxLine);
+        mux13 = new mux1Bit4x(zero, m13,       zero,          zero, opSel.getDataLine(1),    muxLine);
     }
     public void calc() {
-        and1.calc();
-        or3.calc();
-        or4.calc();
-        or5.calc();
-        or6.calc();
-        or7.calc();
-        or8.calc();
-        // order is impoprtant
-        or1.calc();
-        or2.calc();
+        orPCLd2.calc();
+        orPCLd3.calc();
+        orAdrSel.calc();
+        oreImm.calc();
+        orReg.calc();
+        orOP1.calc();
+        orOP2.calc();
         mux1.calc();
         mux2.calc();
         mux3.calc();
