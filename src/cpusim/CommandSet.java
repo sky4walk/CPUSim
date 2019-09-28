@@ -15,7 +15,7 @@ package cpusim;
  * InstructionLoad	1	0	0	1	0	0		1	0	0		1	0	0		1	0	0		1	0	0		1	0	0		1	0	0
  * ImmediateLoad	0	1	0	0	1	0		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0		0	1	0
  * regWrite		0	0	1	0	0	0		0	1	0		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0
- * regSel		0	0	0	0	0	0		0	1	0		0	0	3		0	0	3		0	0	3		0	0	3		0	0	0
+ * regSel		0	0	2	0	0	0		0	1	0		0	0	3		0	0	3		0	0	3		0	0	3		0	0	0
  * dRegSel		0	0	0	0	0	0		0	1	0		0	0	1		0	0	1		0	0	1		0	0	1		0	0	0
  * sRegSel		0	0	0	0	0	0		0	0	0		0	1	0		0	1	0		0	1	0		0	1	0		0	0	0
  * opSel		0	0	0	0	0	0		0	0	0		0	0	0		0	3	0		0	1	0		0	2	0		0	0	0
@@ -40,7 +40,8 @@ public class CommandSet {
     private Or8xLines orPCLd3;
     private Or2x orAdrSel;
     private Or4x oreImm;
-    private Or4x orReg;
+    private Or5x orReg1;
+    private Or4x orReg2;
     private Or2x orOP1;
     private Or2x orOP2;
     private DataLine1Bit zero = new DataLine1Bit();
@@ -51,6 +52,7 @@ public class CommandSet {
     private DataLine1Bit m23 = new DataLine1Bit();
     private DataLine1Bit m3 = new DataLine1Bit();
     private DataLine1Bit m6 = new DataLine1Bit();
+    private DataLine1Bit m9 = new DataLine1Bit();
     private DataLine1Bit m10m11m12 = new DataLine1Bit();
     private DataLine2Bit muxLine = new DataLine2Bit();
     public CommandSet(
@@ -87,7 +89,8 @@ public class CommandSet {
         orPCLd3  = new Or8xLines(LDR, STR, ADD, SUB, AND, OR, zFlag, zero, m23);
         orAdrSel = new Or2x(LDR, STR, m3);
         oreImm   = new Or4x(LDR, STR, JPZ, zero, m6);
-        orReg    = new Or4x(ADD, OR,  SUB, AND, m10m11m12);
+        orReg1   = new Or5x(LDR, ADD, OR,  SUB, AND, m9);
+        orReg2   = new Or4x(ADD, OR,  SUB, AND, m10m11m12);
         orOP1    = new Or2x(SUB, AND, m12);
         orOP2    = new Or2x( OR, AND, m13);
         
@@ -99,7 +102,7 @@ public class CommandSet {
         mux6  = new mux1Bit4x(zero, m6,        zero,          zero, ImmediateLoad,           muxLine);
         mux7  = new mux1Bit4x(zero, MR1R2,     LDR,           zero, RegisterWrite,           muxLine);        
         mux8  = new mux1Bit4x(zero, MR1R2,     m10m11m12,     zero, regSel.getDataLine(0),   muxLine);
-        mux9  = new mux1Bit4x(zero, zero,      m10m11m12,     zero, regSel.getDataLine(1),   muxLine);        
+        mux9  = new mux1Bit4x(zero, zero,      m9,            zero, regSel.getDataLine(1),   muxLine);        
         mux10 = new mux1Bit4x(zero, MR1R2,     m10m11m12,     zero, dRegSel,                 muxLine);        
         mux11 = new mux1Bit4x(zero, m10m11m12, zero,          zero, sRegSel,                 muxLine);
         mux12 = new mux1Bit4x(zero, m12,       zero,          zero, opSel.getDataLine(0),    muxLine);
@@ -110,7 +113,8 @@ public class CommandSet {
         orPCLd3.calc();
         orAdrSel.calc();
         oreImm.calc();
-        orReg.calc();
+        orReg1.calc();
+        orReg2.calc();
         orOP1.calc();
         orOP2.calc();
         mux1.calc();

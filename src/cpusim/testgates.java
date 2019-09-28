@@ -1120,7 +1120,7 @@ public class testgates {
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
         if ( true  != RegisterWrite.getPin(0)) return false;
-        if ( 0     != regSel.getBitsInt()) return false;
+        if ( 2     != regSel.getBitsInt()) return false;
         if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0 != opSel.getBitsInt()) return false;
@@ -1496,7 +1496,7 @@ public class testgates {
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
         if ( true  != RegisterWrite.getPin(0)) return false;
-        if ( 0     != regSel.getBitsInt()) return false;
+        if ( 2     != regSel.getBitsInt()) return false;
         if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0 != opSel.getBitsInt()) return false;
@@ -1983,17 +1983,18 @@ public class testgates {
         InstructionLoad.setPin(0, false);
         ImmediateLoad.setPin(0, false);
         regWrite.setPin(0, true);
-        regSel.setBitsInt(0);
+        regSel.setBitsInt(2);
         dRegSel.setPin(0, false);
         sRegSel.setPin(0, false);
         opSel.setBitsInt(0);
         dp.clkCycle();
-        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 !=  dp.getDebugRegister1().getBitsInt() ) return false;
         if ( 2 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 17 != dp.getDebugImmediate().getBitsInt() ) return false;
         if ( 13 != Instruction.getBitsInt() ) return false;
+        if ( 23 != dp.getDebugDataBusInOut().getBitsInt() ) return false;
 
-        //SDR [Adr] write value from R1 into Adr
+        //STR [Adr] write value from R1 into Adr
         //load instruction
         PCSel.setPin(0, false);
         PCLoad.setPin(0, false);
@@ -2010,7 +2011,7 @@ public class testgates {
         dp.clkCycle();
         if ( 2 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 14 != Instruction.getBitsInt() ) return false;
-        if ( 17 != dp.getDebugDBus().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugDBus().getBitsInt() ) return false;
         //load Adress
         PCSel.setPin(0, false);
         PCLoad.setPin(0, true);
@@ -2028,7 +2029,7 @@ public class testgates {
         if ( 31 != dp.getDebugDataBusInOut().getBitsInt() ) return false;
         if ( 31 != dp.getDebugImmediate().getBitsInt() ) return false;
         if ( 14 != Instruction.getBitsInt() ) return false;
-        if ( 17 != dp.getDebugDBus().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugDBus().getBitsInt() ) return false;
         //write reg1 to ram adress
         PCSel.setPin(0, false);
         PCLoad.setPin(0, true);
@@ -2043,14 +2044,14 @@ public class testgates {
         opSel.setBitsInt(0);
         dp.clkCycle();
         if ( 31 != dp.getDebugAdressBus().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister1().getBitsInt() ) return false;
         if ( 4 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugDBus().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugDBus().getBitsInt() ) return false;
         if ( 31 != dp.getDebugImmediate().getBitsInt() ) return false;
         if ( 14 != Instruction.getBitsInt() ) return false;
-        if ( 17 !=  dp.getDebugDataBusInOut().getBitsInt() ) return false;
-        if ( 17 !=   dp.getDebugSBus().getBitsInt() ) return false;
-        if ( 17 !=  dp.getDebugRam(31) ) return false;
+        if ( 23 !=  dp.getDebugDataBusInOut().getBitsInt() ) return false;
+        if ( 23 !=   dp.getDebugSBus().getBitsInt() ) return false;
+        if ( 23 !=  dp.getDebugRam(31) ) return false;
         //MR1R2 copy R1 to R2
         //load instruction
         PCSel.setPin(0, false);
@@ -2068,7 +2069,7 @@ public class testgates {
         dp.clkCycle();
         if ( 4 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 15 != Instruction.getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister1().getBitsInt() ) return false;
         if ( 0 != dp.getDebugRegister2().getBitsInt() ) return false;
         //copy R1 to R2
         PCSel.setPin(0, false);
@@ -2084,8 +2085,8 @@ public class testgates {
         opSel.setBitsInt(0);
         dp.clkCycle();
         if ( 5 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         
         //ADD R1 = R1 + R2
         //load instruction
@@ -2103,8 +2104,8 @@ public class testgates {
         dp.clkCycle();
         if ( 5 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 21 != Instruction.getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         //Add
         PCSel.setPin(0, false);
         PCLoad.setPin(0, false);
@@ -2119,7 +2120,7 @@ public class testgates {
         opSel.setBitsInt(0);
         dp.clkCycle();
         if ( 5 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 34 != dp.getDebugAluOut().getBitsInt() ) return false;
+        if ( 46 != dp.getDebugAluOut().getBitsInt() ) return false;
         //store alu out in R1
         PCSel.setPin(0, false);
         PCLoad.setPin(0, true);
@@ -2134,8 +2135,8 @@ public class testgates {
         opSel.setBitsInt(0);
         dp.clkCycle();
         if ( 6 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 34 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 46 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         if ( false != zFlag.getPin(0) ) return false;
 
         //OR R1 = R1 or R2
@@ -2154,8 +2155,8 @@ public class testgates {
         dp.clkCycle();
         if ( 6 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 22 != Instruction.getBitsInt() ) return false;
-        if ( 34 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 46 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         //or
         PCSel.setPin(0, false);
         PCLoad.setPin(0, false);
@@ -2170,7 +2171,7 @@ public class testgates {
         opSel.setBitsInt(3);
         dp.clkCycle();
         if ( 6 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 51 != dp.getDebugAluOut().getBitsInt() ) return false;
+        if ( 63 != dp.getDebugAluOut().getBitsInt() ) return false;
         //store alu out in R1
         PCSel.setPin(0, false);
         PCLoad.setPin(0, true);
@@ -2185,8 +2186,8 @@ public class testgates {
         opSel.setBitsInt(0);
         dp.clkCycle();
         if ( 7 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 51 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 63 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         if ( false != zFlag.getPin(0) ) return false;
 
         //SUB R1 = R1 - R2
@@ -2205,8 +2206,8 @@ public class testgates {
         dp.clkCycle();
         if ( 7 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 23 != Instruction.getBitsInt() ) return false;
-        if ( 51 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 63 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         //sub
         PCSel.setPin(0, false);
         PCLoad.setPin(0, false);
@@ -2221,7 +2222,7 @@ public class testgates {
         opSel.setBitsInt(1);
         dp.clkCycle();
         if ( 7 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 34 != dp.getDebugAluOut().getBitsInt() ) return false;
+        if ( 40 != dp.getDebugAluOut().getBitsInt() ) return false;
         //store alu out in R1
         PCSel.setPin(0, false);
         PCLoad.setPin(0, true);
@@ -2236,8 +2237,8 @@ public class testgates {
         opSel.setBitsInt(0);
         dp.clkCycle();
         if ( 8 != dp.getDebugPC().getBitsInt() ) return false;
-        if ( 34 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 40 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         if ( false != zFlag.getPin(0) ) return false;
         
         //AND R1 = R1 & R2
@@ -2256,8 +2257,8 @@ public class testgates {
         dp.clkCycle();
         if ( 8 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 24 != Instruction.getBitsInt() ) return false;
-        if ( 34 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 40 != dp.getDebugRegister1().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         //and
         PCSel.setPin(0, false);
         PCLoad.setPin(0, false);
@@ -2288,7 +2289,7 @@ public class testgates {
         dp.clkCycle();
         if ( 9 != dp.getDebugPC().getBitsInt() ) return false;
         if ( 0 != dp.getDebugRegister1().getBitsInt() ) return false;
-        if ( 17 != dp.getDebugRegister2().getBitsInt() ) return false;
+        if ( 23 != dp.getDebugRegister2().getBitsInt() ) return false;
         if ( true != zFlag.getPin(0) ) return false;
         
         //JPZ 
@@ -2375,10 +2376,10 @@ public class testgates {
         
         c.setDebugRamWrite(0, getMnm(mnm.LDA));
         c.setDebugRamWrite(1, 11);
-        c.setDebugRamWrite(11, 21);
+        c.setDebugRamWrite(11, 23);
 
         c.calc();
-        int r = c.getDebugRegister1();
+        if ( 23 != c.getDebugRegister1() ) return false;
         
         
         return true;

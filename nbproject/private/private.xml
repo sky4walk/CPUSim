@@ -5,6 +5,11 @@
         <group>
             <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CPU.java</file>
             <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/testgates.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CommandSet.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DataPath.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/DSBusRegALU.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/Or5x.java</file>
+            <file>file:/C:/Users/andre/develop/CPUSim/src/cpusim/CPUSim.java</file>
         </group>
     </open-files>
 </project-private>
