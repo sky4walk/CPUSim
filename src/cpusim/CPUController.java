@@ -37,9 +37,10 @@ public class CPUController {
             DataLine1Bit sRegSel,
             DataLine1Bit addressSel,
             DataLine2Bit regSel,
-            DataLine2Bit opSel ) {
+            DataLine2Bit opSel,
+            DataLine1Bit startCycle) {
         cc = new CycleCounter( 
-                counter, new DataLine1Bit(), new DataLine1Bit(), 
+                counter, startCycle, new DataLine1Bit(), 
                 new DataLine1Bit(), new DataLine1Bit());
         id = new InstructionDecoder(
                 Instruction, LDA, STR, MR1R2, JPZ, AND, OR, ADD, SUB);

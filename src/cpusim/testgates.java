@@ -1452,13 +1452,17 @@ public class testgates {
         DataLine1Bit addressSel  = new DataLine1Bit();
         DataLine2Bit regSel  = new DataLine2Bit();
         DataLine2Bit opSel  = new DataLine2Bit();        
+        DataLine1Bit startLine  = new DataLine1Bit();
         CPUController cc = new CPUController(
                 Instruction, zFlag, PCSelect, PCLoad, Write, InstructionLoad, 
                 ImmediateLoad, RegisterWrite, dRegSel, sRegSel, addressSel, 
-                regSel, opSel);
+                regSel, opSel, startLine);
+        
         //LDR
         Instruction.setBitsInt(0);
         cc.clkCycle();
+        boolean r = startLine.getPin(0);
+        if ( false != startLine.getPin(0)) return false;
         if ( false != PCSelect.getPin(0)) return false;
         if ( false != PCLoad.getPin(0)) return false;
         if ( false != addressSel.getPin(0)) return false;
@@ -1471,6 +1475,7 @@ public class testgates {
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         cc.clkCycle();
+        if ( false != startLine.getPin(0)) return false;
         if ( false != PCSelect.getPin(0)) return false;
         if ( true  != PCLoad.getPin(0)) return false;
         if ( false != addressSel.getPin(0)) return false;
@@ -1483,6 +1488,7 @@ public class testgates {
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         cc.clkCycle();
+        if ( true  != startLine.getPin(0)) return false;
         if ( false != PCSelect.getPin(0)) return false;
         if ( true  != addressSel.getPin(0)) return false;
         if ( true  != PCLoad.getPin(0)) return false;
@@ -2332,17 +2338,47 @@ public class testgates {
         sRegSel.setPin(0, false);
         opSel.setBitsInt(0);
         dp.clkCycle();
-        int r = dp.getDebugPC().getBitsInt();
+        if ( 26 != dp.getDebugPC().getBitsInt() ) return false;
         
         return true;
+    }
+    public enum mnm {
+        LDA, STR, MR1R2, ADD, SUB, OR, AND, JPZ
+    }
+    public int getMnm(mnm val) {
+        switch(val) {
+            case LDA:
+                return 0;
+            case STR:
+                return 1;
+            case MR1R2:
+                return 2;
+            case ADD:
+                return 3;
+            case SUB:
+                return 4;
+            case OR:
+                return 5;
+            case AND:
+                return 6;
+            case JPZ:
+                return 7;
+        }
+        return -1;
     }
     public boolean testCPU() {
         int cnt = nand.getInstances();
         CPU c = new CPU();
-        cnt = nand.getInstances() - cnt;
-        
+        cnt = nand.getInstances() - cnt;      
         System.out.println("Number of NAND Gates: " + cnt);
+        
+        c.setDebugRamWrite(0, getMnm(mnm.LDA));
+        c.setDebugRamWrite(1, 11);
+        c.setDebugRamWrite(2, 21);
+
         c.clkCycle();
+        
+        
         return true;
     }
 }

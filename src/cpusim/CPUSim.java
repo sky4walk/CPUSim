@@ -60,5 +60,4 @@ public class CPUSim {
        CPUSim sim = new CPUSim();
        sim.testCircuit();
     }
-    
 }
