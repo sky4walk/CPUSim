@@ -1461,7 +1461,7 @@ public class testgates {
         //LDR
         Instruction.setBitsInt(0);
         cc.clkCycle();
-        boolean r = startLine.getPin(0);
+        if ( false != startLine.getPin(0) ) return false;
         if ( false != startLine.getPin(0)) return false;
         if ( false != PCSelect.getPin(0)) return false;
         if ( false != PCLoad.getPin(0)) return false;
@@ -1475,7 +1475,7 @@ public class testgates {
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         cc.clkCycle();
-        if ( false != startLine.getPin(0)) return false;
+        if ( false != startLine.getPin(0) ) return false;
         if ( false != PCSelect.getPin(0)) return false;
         if ( true  != PCLoad.getPin(0)) return false;
         if ( false != addressSel.getPin(0)) return false;
@@ -1488,7 +1488,7 @@ public class testgates {
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         cc.clkCycle();
-        if ( true  != startLine.getPin(0)) return false;
+        if ( true != startLine.getPin(0) ) return false;
         if ( false != PCSelect.getPin(0)) return false;
         if ( true  != addressSel.getPin(0)) return false;
         if ( true  != PCLoad.getPin(0)) return false;
@@ -1504,6 +1504,7 @@ public class testgates {
         //STR Test
         Instruction.setBitsInt(1);
         cc.clkCycle();
+        if ( false != startLine.getPin(0) ) return false;
         if ( false != PCSelect.getPin(0)) return false;
         if ( false != PCLoad.getPin(0)) return false;
         if ( false != addressSel.getPin(0)) return false;
@@ -2374,9 +2375,10 @@ public class testgates {
         
         c.setDebugRamWrite(0, getMnm(mnm.LDA));
         c.setDebugRamWrite(1, 11);
-        c.setDebugRamWrite(2, 21);
+        c.setDebugRamWrite(11, 21);
 
-        c.clkCycle();
+        c.calc();
+        int r = c.getDebugRegister1();
         
         
         return true;

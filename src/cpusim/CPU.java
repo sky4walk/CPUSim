@@ -67,4 +67,7 @@ public class CPU {
     public boolean getDebugZFlag() {
         return zFlag.getPin(0);
     }
+    public int getDebugCycleCnt() {
+        return cc.getDebugCycleCnt().getBitsInt();
+    }
 }

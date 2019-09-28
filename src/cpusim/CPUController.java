@@ -40,7 +40,7 @@ public class CPUController {
             DataLine2Bit opSel,
             DataLine1Bit startCycle) {
         cc = new CycleCounter( 
-                counter, startCycle, new DataLine1Bit(), 
+                counter, new DataLine1Bit(), startCycle,
                 new DataLine1Bit(), new DataLine1Bit());
         id = new InstructionDecoder(
                 Instruction, LDA, STR, MR1R2, JPZ, AND, OR, ADD, SUB);
