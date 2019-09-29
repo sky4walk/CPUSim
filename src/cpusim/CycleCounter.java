@@ -46,14 +46,16 @@ public class CycleCounter {
         cycle3 = cycle3Line;
         zero.setBitsInt(0);
         not1 = new Not1x(zero.getDataLine(0),one.getDataLine(0));
-	not1.calc();
         write.setPin(0, true);
         add = new Add8Bit(counter, one, aluMux, new DataLine1Bit(), new DataLine1Bit());
         mux = new mux8Bit2x(aluMux, zero, muxReg, orMux);
         reg = new Register8Bit(muxReg, counter, write);
+        //not noce but it must be done beause its not real circuit
         calc();
     }
     private void calc() {
+        not1.calc();
+
         notCyc1a.setInput(counter.getPin(0), counter.getPin(0));
         notCyc1a.calc();
         notCyc1b.setInput(counter.getPin(1), counter.getPin(1));
@@ -83,7 +85,6 @@ public class CycleCounter {
 
         add.calc();
         mux.calc();
-        int r = muxReg.getBitsInt();
         reg.clkCycle();
         calc();
     }

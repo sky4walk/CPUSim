@@ -44,8 +44,10 @@ public class CommandSet {
     private Or4x orReg2;
     private Or2x orOP1;
     private Or2x orOP2;
+    private And2x and1;
     private DataLine1Bit zero = new DataLine1Bit();
     private DataLine1Bit one  = new DataLine1Bit();
+    private DataLine1Bit m1 = new DataLine1Bit();
     private DataLine1Bit m12 = new DataLine1Bit();
     private DataLine1Bit m13 = new DataLine1Bit();
     private DataLine1Bit m22 = new DataLine1Bit();
@@ -85,8 +87,9 @@ public class CommandSet {
         muxLine.setDataLine(0, cklCounter.getDataLine(0));
         muxLine.setDataLine(1, cklCounter.getDataLine(1));
 
+        and1 = new And2x(JPZ, zFlag, m1);
         orPCLd2  = new Or4x(LDR, STR, MR1R2, JPZ, m22);
-        orPCLd3  = new Or8xLines(LDR, STR, ADD, SUB, AND, OR, zFlag, zero, m23);
+        orPCLd3  = new Or8xLines(LDR, STR, ADD, SUB, AND, OR, JPZ, zero, m23);
         orAdrSel = new Or2x(LDR, STR, m3);
         oreImm   = new Or4x(LDR, STR, JPZ, zero, m6);
         orReg1   = new Or5x(LDR, ADD, OR,  SUB, AND, m9);
@@ -94,13 +97,13 @@ public class CommandSet {
         orOP1    = new Or2x(SUB, OR, m12);
         orOP2    = new Or2x(AND, OR, m13);
         
-        mux1  = new mux1Bit4x(zero, zero,      JPZ,           zero, PCSelect,                muxLine);
+        mux1  = new mux1Bit4x(zero, zero,      m1,            zero, PCSelect,                muxLine);
         mux2  = new mux1Bit4x(zero, m22,       m23,           zero, PCLoad,                  muxLine);
         mux3  = new mux1Bit4x(zero, zero,      m3,            zero, addressSel,              muxLine);
         mux4  = new mux1Bit4x(zero, zero,      STR,           zero, Write,                   muxLine);
         mux5  = new mux1Bit4x(one,  zero,      zero,          zero, InstructionLoad,         muxLine);
         mux6  = new mux1Bit4x(zero, m6,        zero,          zero, ImmediateLoad,           muxLine);
-        mux7  = new mux1Bit4x(zero, MR1R2,     m9,           zero, RegisterWrite,           muxLine);        
+        mux7  = new mux1Bit4x(zero, MR1R2,     m9,            zero, RegisterWrite,           muxLine);        
         mux8  = new mux1Bit4x(zero, MR1R2,     m10m11m12,     zero, regSel.getDataLine(0),   muxLine);
         mux9  = new mux1Bit4x(zero, zero,      m9,            zero, regSel.getDataLine(1),   muxLine);        
         mux10 = new mux1Bit4x(zero, MR1R2,     zero,          zero, dRegSel,                 muxLine);        
@@ -109,6 +112,7 @@ public class CommandSet {
         mux13 = new mux1Bit4x(zero, m13,       zero,          zero, opSel.getDataLine(1),    muxLine);
     }
     public void calc() {
+        and1.calc();
         orPCLd2.calc();
         orPCLd3.calc();
         orAdrSel.calc();

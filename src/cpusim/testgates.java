@@ -86,6 +86,24 @@ public class testgates {
 
         return true;
     }
+    public boolean testNor() {
+        nor n = new nor();
+        
+        n.setInput(false, false);
+        n.calc();
+        if ( true != n.getOutput() ) return false;
+        n.setInput(false, true);
+        n.calc();
+        if ( false != n.getOutput() ) return false;
+        n.setInput(true, false);
+        n.calc();
+        if ( false != n.getOutput() ) return false;
+        n.setInput(true, true);
+        n.calc();
+        if ( false != n.getOutput() ) return false;
+
+        return true;
+    }
     public boolean testXor() {
         xor xorTest = new xor();
 
@@ -1409,8 +1427,8 @@ public class testgates {
         if ( 0 != opSel.getBitsInt()) return false;
         cklCounter.setBitsInt(2);
         cs.calc();
-        if ( true  != PCSelect.getPin(0)) return false;
-        if ( false != PCLoad.getPin(0)) return false;
+        if ( false != PCSelect.getPin(0)) return false;
+        if ( true  != PCLoad.getPin(0)) return false;
         if ( false != addressSel.getPin(0)) return false;
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
@@ -1596,8 +1614,8 @@ public class testgates {
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0 != opSel.getBitsInt()) return false;
         cc.clkCycle();
-        if ( true  != PCSelect.getPin(0)) return false;
-        if ( false != PCLoad.getPin(0)) return false;
+        if ( false != PCSelect.getPin(0)) return false;
+        if ( true  != PCLoad.getPin(0)) return false;
         if ( false != addressSel.getPin(0)) return false;
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
@@ -2344,8 +2362,7 @@ public class testgates {
         
         return true;
     }
-    
-    
+        
     public boolean testCPU() {
         int cnt = nand.getInstances();
         CPU c = new CPU();
@@ -2362,16 +2379,25 @@ public class testgates {
         c.setDebugRamWrite(6, InstructionDecoder.getMnm(InstructionDecoder.mnm.STR));        
         c.setDebugRamWrite(7, 73);
         c.setDebugRamWrite(8, InstructionDecoder.getMnm(InstructionDecoder.mnm.AND));        
-        
-        //c.setDebugRamWrite(8, InstructionDecoder.getMnm(InstructionDecoder.mnm.LDA));
-        //c.setDebugRamWrite(9, 71);
-        //c.setDebugRamWrite(10, InstructionDecoder.getMnm(InstructionDecoder.mnm.AND));    
-        
+        c.setDebugRamWrite(9, InstructionDecoder.getMnm(InstructionDecoder.mnm.MR1R2));        
+        c.setDebugRamWrite(10, InstructionDecoder.getMnm(InstructionDecoder.mnm.LDA));
+        c.setDebugRamWrite(11, 74);
+        c.setDebugRamWrite(12, InstructionDecoder.getMnm(InstructionDecoder.mnm.OR));        
+        c.setDebugRamWrite(13, InstructionDecoder.getMnm(InstructionDecoder.mnm.MR1R2));
+        c.setDebugRamWrite(14, InstructionDecoder.getMnm(InstructionDecoder.mnm.SUB));     
+        c.setDebugRamWrite(15, InstructionDecoder.getMnm(InstructionDecoder.mnm.JPZ));
+        c.setDebugRamWrite(16, 20);
+        c.setDebugRamWrite(20, InstructionDecoder.getMnm(InstructionDecoder.mnm.LDA));
+        c.setDebugRamWrite(21, 74);
+        c.setDebugRamWrite(22, InstructionDecoder.getMnm(InstructionDecoder.mnm.JPZ));
+        c.setDebugRamWrite(23, 30);
+                
         // data code
         c.setDebugRamWrite(71, 23);
         c.setDebugRamWrite(72, 59);
         c.setDebugRamWrite(73, 0);
-
+        c.setDebugRamWrite(74, 12);
+        
         c.calc();
         if ( 23 != c.getDebugRegister1() ) return false;
         c.calc();
@@ -2381,11 +2407,26 @@ public class testgates {
         c.calc();
         if ( 82 != c.getDebugRegister1() ) return false;
         c.calc();
-        if ( 82 != c.getDebugRamRead(73) ) return false;
-        
+        if ( 82 != c.getDebugRamRead(73) ) return false;        
         c.calc();
         if ( 18 != c.getDebugRegister1() ) return false;
-        
+        c.calc();
+        if ( 18 != c.getDebugRegister2() ) return false;
+        c.calc();
+        if ( 12 != c.getDebugRegister1() ) return false;
+        c.calc();
+        if ( 30 != c.getDebugRegister1() ) return false;
+        c.calc();
+        if ( 30 != c.getDebugRegister1() ) return false;
+        if ( 30 != c.getDebugRegister2() ) return false;
+        c.calc(); //SUB
+        if ( true != c.getDebugZFlag() ) return false;
+        c.calc(); //JPZ
+        if ( 20 != c.getDebugPC() ) return false;        
+        c.calc(); //LDA
+        if ( false != c.getDebugZFlag() ) return false;
+        c.calc(); //JPZ
+        if ( 24 != c.getDebugPC() ) return false;
         
         return true;
     }

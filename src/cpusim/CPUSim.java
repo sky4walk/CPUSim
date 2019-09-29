@@ -16,6 +16,7 @@ public class CPUSim {
         if ( !tester.testNot() )    System.out.println("NOK not");
         if ( !tester.testAnd() )    System.out.println("NOK and");
         if ( !tester.testOr() )     System.out.println("NOK or");
+        if ( !tester.testNor() )     System.out.println("NOK nor");
         if ( !tester.testXor() )    System.out.println("NOK xor");
         if ( !tester.testAdd1Bit()) System.out.println("NOK Add1Bit");
         if ( !tester.testMux1Bit2x())   System.out.println("NOK Mux1Bit2x");
