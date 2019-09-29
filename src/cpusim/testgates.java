@@ -1237,7 +1237,7 @@ public class testgates {
         if ( 0     != regSel.getBitsInt()) return false;
         if ( false != dRegSel.getPin(0)) return false;
         if ( true  != sRegSel.getPin(0)) return false;
-        if ( 3     != opSel.getBitsInt()) return false;
+        if ( 2     != opSel.getBitsInt()) return false;
         cklCounter.setBitsInt(2);
         cs.calc();
         if ( false != PCSelect.getPin(0)) return false;
@@ -1246,9 +1246,9 @@ public class testgates {
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
-        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( true  != RegisterWrite.getPin(0)) return false;
         if ( 3     != regSel.getBitsInt()) return false;
-        if ( true  != dRegSel.getPin(0)) return false;
+        if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         AND.reset();
@@ -1279,7 +1279,7 @@ public class testgates {
         if ( 0     != regSel.getBitsInt()) return false;
         if ( false != dRegSel.getPin(0)) return false;
         if ( true  != sRegSel.getPin(0)) return false;
-        if ( 2     != opSel.getBitsInt()) return false;
+        if ( 3     != opSel.getBitsInt()) return false;
         cklCounter.setBitsInt(2);
         cs.calc();
         if ( false != PCSelect.getPin(0)) return false;
@@ -1288,9 +1288,9 @@ public class testgates {
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
-        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( true  != RegisterWrite.getPin(0)) return false;
         if ( 3     != regSel.getBitsInt()) return false;
-        if ( true  != dRegSel.getPin(0)) return false;
+        if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         OR.reset();
@@ -1330,9 +1330,9 @@ public class testgates {
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
-        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( true  != RegisterWrite.getPin(0)) return false;
         if ( 3     != regSel.getBitsInt()) return false;
-        if ( true  != dRegSel.getPin(0)) return false;
+        if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         ADD.reset();
@@ -1372,9 +1372,9 @@ public class testgates {
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
-        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( true  != RegisterWrite.getPin(0)) return false;
         if ( 3     != regSel.getBitsInt()) return false;
-        if ( true  != dRegSel.getPin(0)) return false;
+        if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         SUB.reset();
@@ -1672,7 +1672,7 @@ public class testgates {
         if ( 0     != regSel.getBitsInt()) return false;
         if ( false != dRegSel.getPin(0)) return false;
         if ( true  != sRegSel.getPin(0)) return false;
-        if ( 3     != opSel.getBitsInt()) return false;
+        if ( 2     != opSel.getBitsInt()) return false;
         cc.clkCycle();
         if ( false != PCSelect.getPin(0)) return false;
         if ( true  != PCLoad.getPin(0)) return false;
@@ -1680,9 +1680,9 @@ public class testgates {
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
-        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( true  != RegisterWrite.getPin(0)) return false;
         if ( 3     != regSel.getBitsInt()) return false;
-        if ( true  != dRegSel.getPin(0)) return false;
+        if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         
@@ -1711,7 +1711,7 @@ public class testgates {
         if ( 0     != regSel.getBitsInt()) return false;
         if ( false != dRegSel.getPin(0)) return false;
         if ( true  != sRegSel.getPin(0)) return false;
-        if ( 2     != opSel.getBitsInt()) return false;
+        if ( 3     != opSel.getBitsInt()) return false;
         cc.clkCycle();
         if ( false != PCSelect.getPin(0)) return false;
         if ( true  != PCLoad.getPin(0)) return false;
@@ -1719,9 +1719,9 @@ public class testgates {
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
-        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( true  != RegisterWrite.getPin(0)) return false;
         if ( 3     != regSel.getBitsInt()) return false;
-        if ( true  != dRegSel.getPin(0)) return false;
+        if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         
@@ -1758,9 +1758,9 @@ public class testgates {
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
-        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( true  != RegisterWrite.getPin(0)) return false;
         if ( 3     != regSel.getBitsInt()) return false;
-        if ( true  != dRegSel.getPin(0)) return false;
+        if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         
@@ -1797,9 +1797,9 @@ public class testgates {
         if ( false != Write.getPin(0)) return false;
         if ( false != InstructionLoad.getPin(0)) return false;
         if ( false != ImmediateLoad.getPin(0)) return false;
-        if ( false != RegisterWrite.getPin(0)) return false;
+        if ( true  != RegisterWrite.getPin(0)) return false;
         if ( 3     != regSel.getBitsInt()) return false;
-        if ( true  != dRegSel.getPin(0)) return false;
+        if ( false != dRegSel.getPin(0)) return false;
         if ( false != sRegSel.getPin(0)) return false;
         if ( 0     != opSel.getBitsInt()) return false;
         return true;
@@ -2344,42 +2344,47 @@ public class testgates {
         
         return true;
     }
-    public enum mnm {
-        LDA, STR, MR1R2, ADD, SUB, OR, AND, JPZ
-    }
-    public int getMnm(mnm val) {
-        switch(val) {
-            case LDA:
-                return 0;
-            case STR:
-                return 1;
-            case MR1R2:
-                return 2;
-            case ADD:
-                return 3;
-            case SUB:
-                return 4;
-            case OR:
-                return 5;
-            case AND:
-                return 6;
-            case JPZ:
-                return 7;
-        }
-        return -1;
-    }
+    
+    
     public boolean testCPU() {
         int cnt = nand.getInstances();
         CPU c = new CPU();
         cnt = nand.getInstances() - cnt;      
         System.out.println("Number of NAND Gates: " + cnt);
         
-        c.setDebugRamWrite(0, getMnm(mnm.LDA));
-        c.setDebugRamWrite(1, 11);
-        c.setDebugRamWrite(11, 23);
+        // program code
+        c.setDebugRamWrite(0, InstructionDecoder.getMnm(InstructionDecoder.mnm.LDA));
+        c.setDebugRamWrite(1, 71);
+        c.setDebugRamWrite(2, InstructionDecoder.getMnm(InstructionDecoder.mnm.MR1R2));        
+        c.setDebugRamWrite(3, InstructionDecoder.getMnm(InstructionDecoder.mnm.LDA));
+        c.setDebugRamWrite(4, 72);
+        c.setDebugRamWrite(5, InstructionDecoder.getMnm(InstructionDecoder.mnm.ADD));        
+        c.setDebugRamWrite(6, InstructionDecoder.getMnm(InstructionDecoder.mnm.STR));        
+        c.setDebugRamWrite(7, 73);
+        c.setDebugRamWrite(8, InstructionDecoder.getMnm(InstructionDecoder.mnm.AND));        
+        
+        //c.setDebugRamWrite(8, InstructionDecoder.getMnm(InstructionDecoder.mnm.LDA));
+        //c.setDebugRamWrite(9, 71);
+        //c.setDebugRamWrite(10, InstructionDecoder.getMnm(InstructionDecoder.mnm.AND));    
+        
+        // data code
+        c.setDebugRamWrite(71, 23);
+        c.setDebugRamWrite(72, 59);
+        c.setDebugRamWrite(73, 0);
 
         c.calc();
         if ( 23 != c.getDebugRegister1() ) return false;
+        c.calc();
+        if ( 23 != c.getDebugRegister2() ) return false;
+        c.calc();
+        if ( 59 != c.getDebugRegister1() ) return false;
+        c.calc();
+        if ( 82 != c.getDebugRegister1() ) return false;
+        c.calc();
+        if ( 82 != c.getDebugRamRead(73) ) return false;
+        
+        c.calc();
+        if ( 18 != c.getDebugRegister1() ) return false;
         
         
         return true;

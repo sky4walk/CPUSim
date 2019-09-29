@@ -14,9 +14,9 @@ package cpusim;
  * ramWrite		0	0	0	0	0	1		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0
  * InstructionLoad	1	0	0	1	0	0		1	0	0		1	0	0		1	0	0		1	0	0		1	0	0		1	0	0
  * ImmediateLoad	0	1	0	0	1	0		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0		0	1	0
- * regWrite		0	0	1	0	0	0		0	1	0		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0
+ * regWrite		0	0	1	0	0	0		0	1	0		0	0	1		0	0	1		0	0	1		0	0	1		0	0	0
  * regSel		0	0	2	0	0	0		0	1	0		0	0	3		0	0	3		0	0	3		0	0	3		0	0	0
- * dRegSel		0	0	0	0	0	0		0	1	0		0	0	1		0	0	1		0	0	1		0	0	1		0	0	0
+ * dRegSel		0	0	0	0	0	0		0	1	0		0	0	0		0	0	0		0	0	0		0	0	0		0	0	0
  * sRegSel		0	0	0	0	0	0		0	0	0		0	1	0		0	1	0		0	1	0		0	1	0		0	0	0
  * opSel		0	0	0	0	0	0		0	0	0		0	0	0		0	3	0		0	1	0		0	2	0		0	0	0
  * @author github@AndreBetz.de
@@ -91,8 +91,8 @@ public class CommandSet {
         oreImm   = new Or4x(LDR, STR, JPZ, zero, m6);
         orReg1   = new Or5x(LDR, ADD, OR,  SUB, AND, m9);
         orReg2   = new Or4x(ADD, OR,  SUB, AND, m10m11m12);
-        orOP1    = new Or2x(SUB, AND, m12);
-        orOP2    = new Or2x( OR, AND, m13);
+        orOP1    = new Or2x(SUB, OR, m12);
+        orOP2    = new Or2x(AND, OR, m13);
         
         mux1  = new mux1Bit4x(zero, zero,      JPZ,           zero, PCSelect,                muxLine);
         mux2  = new mux1Bit4x(zero, m22,       m23,           zero, PCLoad,                  muxLine);
@@ -100,10 +100,10 @@ public class CommandSet {
         mux4  = new mux1Bit4x(zero, zero,      STR,           zero, Write,                   muxLine);
         mux5  = new mux1Bit4x(one,  zero,      zero,          zero, InstructionLoad,         muxLine);
         mux6  = new mux1Bit4x(zero, m6,        zero,          zero, ImmediateLoad,           muxLine);
-        mux7  = new mux1Bit4x(zero, MR1R2,     LDR,           zero, RegisterWrite,           muxLine);        
+        mux7  = new mux1Bit4x(zero, MR1R2,     m9,           zero, RegisterWrite,           muxLine);        
         mux8  = new mux1Bit4x(zero, MR1R2,     m10m11m12,     zero, regSel.getDataLine(0),   muxLine);
         mux9  = new mux1Bit4x(zero, zero,      m9,            zero, regSel.getDataLine(1),   muxLine);        
-        mux10 = new mux1Bit4x(zero, MR1R2,     m10m11m12,     zero, dRegSel,                 muxLine);        
+        mux10 = new mux1Bit4x(zero, MR1R2,     zero,          zero, dRegSel,                 muxLine);        
         mux11 = new mux1Bit4x(zero, m10m11m12, zero,          zero, sRegSel,                 muxLine);
         mux12 = new mux1Bit4x(zero, m12,       zero,          zero, opSel.getDataLine(0),    muxLine);
         mux13 = new mux1Bit4x(zero, m13,       zero,          zero, opSel.getDataLine(1),    muxLine);

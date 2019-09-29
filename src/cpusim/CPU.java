@@ -70,4 +70,10 @@ public class CPU {
     public int getDebugCycleCnt() {
         return cc.getDebugCycleCnt().getBitsInt();
     }
+    public int getDebugAluOut() {
+        return dp.getDebugAluOut().getBitsInt();
+    }
+    public int getDebugOpSel() {
+        return opSel.getBitsInt();
+    }
 }

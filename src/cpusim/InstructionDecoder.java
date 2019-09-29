@@ -5,7 +5,14 @@
 package cpusim;
 
 /**
- *
+ * LDA:     0
+ * STR:     1
+ * MR1R2:   2
+ * JPZ:     3
+ * AND:     4
+ * OR:      5
+ * ADD:     6
+ * SUB:     7
  * @author github@andrebetz.de
  */
 public class InstructionDecoder {
@@ -115,5 +122,29 @@ public class InstructionDecoder {
         and8.setInput(instruction.getPin(0),instruction.getPin(1), instruction.getPin(2));
         and8.calc();
         SUB.setPin(0, and8.getOutput());       
+    }
+    public static enum mnm {
+        LDA, STR, MR1R2, JPZ, AND, OR, ADD, SUB
+    }
+    public static int getMnm(mnm val) {
+        switch(val) {
+            case LDA:
+                return 0;
+            case STR:
+                return 1;
+            case MR1R2:
+                return 2;
+            case JPZ:
+                return 3;
+            case AND:
+                return 4;
+            case OR:
+                return 5;
+            case ADD:
+                return 6;
+            case SUB:
+                return 7;
+        }
+        return -1;
     }
 }
